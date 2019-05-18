@@ -1,3 +1,8 @@
+/* main */
+.main {
+    background-color: var(--background-color);
+}
+
 /* Logotipo */
 .logo {
     font-family: 'Pacifico', cursive;
