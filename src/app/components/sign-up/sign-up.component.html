@@ -23,7 +23,7 @@
                   <button class="btn btn-primary w-100" type="submit" [disabled]="!RegisterForm.form.valid">Siguiente</button>
                 </div>
                 <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="result === true">
-                    <p><strong>Info:</strong> Te has registrado correctamente. <a [routerLink]="['/login']">Entrar</a></p>
+                    <p><strong>Info:</strong> Te has registrado correctamente. <a [routerLink]="['/signin']">Entrar</a></p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -40,7 +40,7 @@
       </div>
       <div class="card mt-3">
           <div class="card-body text-center">
-            <span>¿Tienes una cuenta? <a [routerLink]="['/login']" class="register-link">Inicia sesión</a></span>
+            <span>¿Tienes una cuenta? <a [routerLink]="['/signin']" class="register-link">Inicia sesión</a></span>
           </div>
       </div>
   </div>

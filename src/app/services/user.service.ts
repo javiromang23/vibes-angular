@@ -61,4 +61,10 @@ export class UserService {
     }
     return token;
   }
+
+  /** Método para conseguir el username del localstorage */
+  getUsernameStored() {
+    const username = JSON.parse(localStorage.getItem('user_session'));
+    return username;
+  }
 }

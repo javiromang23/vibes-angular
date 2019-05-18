@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service';
 })
 export class NavbarComponent implements OnInit {
 
+  public username: string;
 
   constructor(
     private userService: UserService,
@@ -16,6 +17,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.username = this.userService.getUsernameStored();
   }
 
   logOut() {
