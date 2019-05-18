@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <a [routerLink]="['/timeline']" class="navbar-brand logo">Vibes</a>
+  <form>
+    <div class="input-group flex-row-reverse">
+      <input class="form-control" type="search" placeholder="Busca">
+      <div class="input-group-prepend">
+        <div class="input-group-text"><i class="fas fa-search"></i></div>
+      </div>
+    </div>
+  </form>
+  <button class="navbar-toggler" type="button" aria-expanded="false" (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed" aria-controls="menu">
+      <i class="fas fa-bars"></i>
+  </button>
+  <div class="collapse navbar-collapse p-2" id="menu" [collapse]="!isCollapsed">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/timeline']">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/explore']">Explora</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/', entity.username]">Perfil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logOut()">Cerrar sesión</a>
+      </li>
+    </ul>
+  </div>
+</nav>

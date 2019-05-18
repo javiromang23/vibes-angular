@@ -1,0 +1,109 @@
+/* Logotipo */
+.logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 36px;
+}
+
+.logo:hover {
+    color: var(--main-color);
+    transform: scale(1.1);
+    transition: .2s ease-in-out;
+}
+
+/* Navbar */
+.navbar {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.navbar-toggler {
+    border: none;
+    color: rgba(0, 0, 0, 0.8)
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.nav-link {
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+}
+
+.nav-link:hover {
+    color: var(--main-color)!important;
+}
+
+.navbar-expand-lg {
+    justify-content: space-around;
+}
+
+.navbar-collapse {
+    flex-grow: unset;
+}
+
+/* Formulario de busqueda */
+.input-group-text, .form-control {
+    background-color: #FAFAFA;
+}
+
+.input-group-text {
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+    border-radius: 1em!important;
+    border-bottom-left-radius: 0!important;
+    border-top-left-radius: 0!important;
+    margin-left: -10px;
+}
+
+.input-group-prepend {
+    margin-right: 0px!important;
+}
+
+.input-group-prepend > .input-group-text{
+    border-bottom-left-radius: 1em!important;
+    border-top-left-radius: 1em!important;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.form-control:focus,
+.form-control:focus + .input-group-prepend > .input-group-text {
+    border-color: #666666;
+    transition: .2s ease-in-out;
+}
+
+.form-control:not(:focus),
+.form-control:not(:focus) + .input-group-prepend > .input-group-text{
+    transition: .2s ease-in-out;
+}
+
+.form-control[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    background-image: url('../../../assets/icon-delete.svg');
+    background-size: 15px;
+    cursor: pointer;
+}
+
+/* Media queries */
+
+@media (max-width: 568px) {
+    .logo {
+        font-size: 24px;
+    }
+    .navbar-expand-lg {
+        justify-content: space-between;
+    }
+    .form-control {
+        width: 150px;
+    }
+}
