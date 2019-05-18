@@ -1,0 +1,44 @@
+<div class="container-fluid d-flex vh-100 flex-column">
+  <div class="container m-auto w-auto">
+      <div class="card">
+          <div class="card-header text-center">
+              <h1 class="logo">Vibes</h1>
+          </div>
+          <div class="card-body">
+              <form #loginForm="ngForm" (ngSubmit)='onSubmit(loginForm)'>
+                  <div class="form-group">
+                      <input type="email" name="email" class="form-control" placeholder="Email" #email="ngModel" [(ngModel)]="user.email" required>
+                      <small class="form-text text-muted text-danger" *ngIf="!email.valid && email.touched">El email es obligatorio</small>
+                  </div>
+                  <div class="form-group">
+                      <input type="password" name="password" class="form-control" placeholder="Contraseña" #password="ngModel" [(ngModel)]="user.password" required>
+                      <small class="form-text text-muted text-danger" *ngIf="!password.valid && password.touched">La contraseña es obligatoria</small>
+                  </div>
+                  <div class="form-group">
+                      <button class="btn btn-primary w-100" type="submit" [disabled]="!loginForm.form.valid">Iniciar sesión</button>
+                  </div>
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="result == false">
+                      <strong>Info:</strong> Error de autenticación, comprueba tu email y/o contraseña.
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+              </form>
+          </div>
+          <div class="card-footer text-center">
+              <div class="link-login">
+                  <a href="#"><i class="fab fa-google"></i> Iniciar sesión con Google</a>
+              </div>
+              <div class="link-login">
+                  <a href="#">¿Olvidaste la contraseña?</a>
+              </div>
+          </div>
+      </div>
+      <div class="card mt-3">
+          <div class="card-body text-center">
+              <span>¿Eres nuevo en Viber? <a [routerLink]="['/register']">Registrate</a></span>
+          </div>
+      </div>
+  </div>
+  <app-footer></app-footer>
+</div>

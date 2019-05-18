@@ -1,0 +1,101 @@
+/* Logotipo */
+.logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 46px;
+    cursor: default;
+}
+
+/* Card */
+
+.card {
+    width: 350px;
+    padding: 10px 25px;
+}
+
+.card-header {
+    border: none;
+    background: #FFF;
+    padding: 15px 10px 5px 10px;
+}
+
+.card-header p {
+    color: #999;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 5px 20px;
+}
+
+.card-body span {
+    color: #999;
+}
+
+.card-body span > a {
+    font-weight: 600;
+}
+
+.card-body span > a:hover {
+    text-decoration: none;
+}
+
+.card-footer {
+    background: #FFF;
+}
+
+.card-footer p {
+    color: #999;
+}
+
+.card-footer p > a {
+    font-weight: 600;
+    color: inherit;
+}
+
+.card-footer p > a:hover {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.link-login {
+    padding: 8px;
+    font-size: 13px;
+}
+
+.link-login a:hover {
+    text-decoration: none;
+}
+
+.link-login:first-child {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* Formulario */
+
+.form-control {
+    background-color: #FAFAFA;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.form-control:focus {
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    box-shadow: none;
+}
+
+.form-control::placeholder {
+    color: #999;
+}
+
+.btn[type="submit"] {
+    font-weight: 600;
+}
+
+/* Media queries */
+@media (max-width: 568px) {
+    .card {
+        width: 100%;
+        margin: 1.25rem auto;
+    }
+}

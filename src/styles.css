@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+
+/* Estilos globales */
+:root {
+    --main-color: #26c6da;
+}
+
+html,
+body {
+    background: #FAFAFA;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    app-footer {
+        display: none;
+    }
+}
+
+a {
+    cursor: pointer;
+}

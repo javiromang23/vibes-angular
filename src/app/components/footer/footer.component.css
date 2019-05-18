@@ -1,0 +1,17 @@
+footer a, footer span{
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #000;
+    padding: 10px;
+}
+
+footer span {
+    font-weight: normal;
+}
+
+footer a:hover {
+    text-decoration: none;
+    color: var(--main-color);
+    transform: scale(1.05);
+    transition: .2s ease-in-out;
+}

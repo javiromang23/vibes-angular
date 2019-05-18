@@ -53,7 +53,7 @@ export class UserService {
 
   /** Método para obtener el token del localStorage */
   getToken() {
-    const token = JSON.parse(localStorage.getItem('token'));
+    const token = JSON.parse(localStorage.getItem('ssid_session'));
     if (!token) {
       this.token = null;
     } else {
