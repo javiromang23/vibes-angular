@@ -1,3 +1,48 @@
-<p>
-  sign-up works!
-</p>
+<div class="container-fluid d-flex vh-100 flex-column main">
+  <div class="container m-auto w-auto">
+      <div class="card">
+          <div class="card-header text-center">
+              <h1 class="logo">Vibes</h1>
+              <p>Registrate para empezar a compartir fotos y videos con tus amigos.</p>
+          </div>
+          <div class="card-body">
+            <form #RegisterForm="ngForm" (ngSubmit)='onSubmit(RegisterForm)'>
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control" placeholder="Correo electrónico" #email="ngModel" [(ngModel)]="user.email" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" name="name" class="form-control" placeholder="Nombre completo" #name="ngModel" [(ngModel)]="user.name" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" #username="ngModel" [(ngModel)]="user.username" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" class="form-control" placeholder="Contraseña" #password="ngModel" [(ngModel)]="user.password" required>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary w-100" type="submit" [disabled]="!RegisterForm.form.valid">Siguiente</button>
+                </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="result === true">
+                    <p><strong>Info:</strong> Te has registrado correctamente. <a [routerLink]="['/login']">Entrar</a></p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </form>
+          </div>
+          <div class="card-footer text-center">
+              <p>
+                Al registrarte, aceptas nuestras <a href="#">Condiciones</a>. Obtén más información sobre cómo recopilamos,
+                usamos y compartimos tus datos en la <a href="#">Política de datos</a>, así como el uso que hacemos de las
+                cookies y tecnologías similares en la <a href="#">Política de cookies</a>.
+              </p>
+          </div>
+      </div>
+      <div class="card mt-3">
+          <div class="card-body text-center">
+            <span>¿Tienes una cuenta? <a [routerLink]="['/login']" class="register-link">Inicia sesión</a></span>
+          </div>
+      </div>
+  </div>
+  <app-footer></app-footer>
+</div>
