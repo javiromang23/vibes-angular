@@ -11,7 +11,5 @@ export class User {
         public website: string,
         public bio: string,
         public sex: string
-    ) {
-        this.signUpDate = new Date();
-    }
+    ) {}
 }

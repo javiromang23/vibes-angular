@@ -23,6 +23,12 @@
                           <span aria-hidden="true">&times;</span>
                       </button>
                   </div>
+                  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="result == true">
+                    <strong>Correcto!</strong> Te estamos redirigiendo...
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
               </form>
           </div>
           <div class="card-footer text-center">

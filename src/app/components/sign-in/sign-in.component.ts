@@ -19,6 +19,7 @@ export class SignInComponent implements OnInit {
     private router: Router
   ) {
     this.token = userService.getToken();
+    this.user = new User('', '', '', '', '', '', new Date(), '', '', '', '');
   }
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class SignInComponent implements OnInit {
       response => {
         this.token = response.token;
         localStorage.setItem('ssid_session', JSON.stringify(this.token));
+        this.result = true;
       },
       error => {
         this.result = false;
