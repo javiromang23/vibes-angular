@@ -7,7 +7,7 @@ export class User {
         public name: string,
         public typeAccount: string,
         public signUpDate: Date,
-        public avatar: string,
+        public avatar: any,
         public website: string,
         public bio: string,
         public sex: string

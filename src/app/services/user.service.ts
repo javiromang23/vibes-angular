@@ -51,6 +51,12 @@ export class UserService {
     return this.http.delete(this.url + 'user/' + username, {headers});
   }
 
+  getImage(username: string, image: string): Observable<Blob> {
+    const headers = this.headers.set('Authorization', this.getToken());
+    return this.http.get(this.url + 'user/' + username + '/' + image,
+    { headers , responseType: 'blob' });
+  }
+
   /** Método para obtener el token del localStorage */
   getToken() {
     const token = JSON.parse(localStorage.getItem('ssid_session'));

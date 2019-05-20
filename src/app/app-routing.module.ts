@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 /* import Components Routes */
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 const routes: Routes = [
-  { path: '', component: SignInComponent },
-  { path: 'signin', component: SignInComponent },
-  { path: 'signup', component: SignUpComponent },
+  { path: '', component: TimelineComponent },
+  { path: 'sign-in', component: SignInComponent },
+  { path: 'sign-up', component: SignUpComponent },
+  { path: 'timeline', component: TimelineComponent },
   { path: '**', component: SignUpComponent }
 ];
 
