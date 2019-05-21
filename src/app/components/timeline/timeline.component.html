@@ -19,12 +19,20 @@
             </div>
           </div>
           <div class="card-footer bg-white border-top-0 p-0">
-            <div class="panel-action p-2 pl-3 pb-1 d-flex justify-content-left align-items-center">
+            <div class="panel-action p-2 pl-3 pb-0 pr-3 d-flex justify-content-left align-items-center">
               <button class="btn"><i class="far fa-heart"></i></button>
               <button class="btn"><i class="far fa-comment"></i></button>
               <div>Le gusta a <b class="bold">{{total}} personas.</b></div>
-              <div class="small bold flex-fill text-right align-self-end">
-                Subido a las {{publication.createdAt | date:'HH:mm dd/MM/yyyy '}}
+              <div class="small bold flex-fill text-right">
+                {{publication.createdAt | date:'HH:mm dd/MM/yyyy '}}
+              </div>
+            </div>
+            <div class="panel-action pl-2 pb-3 d-flex justify-content-left align-items-center flex-wrap">
+              <div class="col-md-12">
+                <b class="bold pr-2">{{publication.user.username}}:</b> {{publication.title}}
+              </div>
+              <div class="col-md-12">
+                {{publication.description}}
               </div>
             </div>
             <div class="border-top d-flex">
@@ -39,7 +47,7 @@
         <div class="card w-100 m-3 border-0">
           <div class="card-header border-0 d-flex">
             <div class="image-wrapper">
-              <div class="image-profile rounded-circle">
+              <div class="image-profile rounded-circle" *ngIf="user">
                 <a [routerLink]=""><img [src]="user.avatar" alt="perfil" /></a>
               </div>
             </div> 

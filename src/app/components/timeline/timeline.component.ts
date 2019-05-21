@@ -33,8 +33,8 @@ export class TimelineComponent implements OnInit {
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }
-    this.loadPublications();
     this.loadProfile();
+    this.loadPublications();
   }
 
   loadPublications() {
@@ -51,6 +51,10 @@ export class TimelineComponent implements OnInit {
         publications.map((publication, index) => {
           this.getImageFile(publication, index);
         });
+        /* Ordenar por fecha de subida */
+        this.publications.sort( (a, b) => {
+          return a.createdAt.getTime() - b.createdAt.getTime();
+        });
       }
     );
   }
@@ -58,7 +62,7 @@ export class TimelineComponent implements OnInit {
   loadProfile() {
     this.userService.getUser(this.userService.getUsernameStored()).subscribe(
       data => {
-        console.log(data);
+        this.getAvatarUser(data.user);
         this.user = data.user;
       },
       error => {
@@ -80,6 +84,17 @@ export class TimelineComponent implements OnInit {
             console.log(error);
           }
         );
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getAvatarUser(user: User) {
+    this.userService.getImage(user.username, user.avatar).subscribe(
+      response => {
+        user.avatar = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
       },
       error => {
         console.log(error);
