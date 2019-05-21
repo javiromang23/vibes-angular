@@ -94,6 +94,10 @@
     cursor: pointer;
 }
 
+.form-control::placeholder {
+    text-align: center;
+}
+
 /* Media queries */
 
 @media (max-width: 568px) {

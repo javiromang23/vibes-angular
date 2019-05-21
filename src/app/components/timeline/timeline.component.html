@@ -1,16 +1,16 @@
 <app-navbar></app-navbar>
 <div class="container-fluid p-0 main">
-    <main class="container d-flex flex-column">
-      <div class="d-flex flex-column m-auto">
-        <div class="card m-3 w-75 overflow-hidden publication" *ngFor="let publication of publications">
+    <main class="container d-flex">
+      <div class="d-flex flex-row flex-wrap publications-wrapper mt-4">
+        <div class="card w-100 overflow-hidden publication flex-column m-3" *ngFor="let publication of publications">
           <div class="card-header bg-white d-flex flex-fill border-bottom-0">
             <div class="image-wrapper">
               <div class="image-profile rounded-circle">
-                <img [src]="publication.user.avatar" alt="perfil" />
+                <a [routerLink]=""><img [src]="publication.user.avatar" alt="perfil" /></a>
               </div>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-              <a>{{publication.user.username}}</a>
+              <a [routerLink]="">{{publication.user.username}}</a>
             </div>
           </div>
           <div class="card-body p-0">
@@ -19,10 +19,13 @@
             </div>
           </div>
           <div class="card-footer bg-white border-top-0 p-0">
-            <div class="panel-action p-2 pl-3 pb-1">
+            <div class="panel-action p-2 pl-3 pb-1 d-flex justify-content-left align-items-center">
               <button class="btn"><i class="far fa-heart"></i></button>
               <button class="btn"><i class="far fa-comment"></i></button>
-              Le gusta a <b class="bold">{{total}} personas.</b>
+              <div>Le gusta a <b class="bold">{{total}} personas.</b></div>
+              <div class="small bold flex-fill text-right align-self-end">
+                Subido a las {{publication.createdAt | date:'HH:mm dd/MM/yyyy '}}
+              </div>
             </div>
             <div class="border-top d-flex">
               <textarea name="comment" id="" class="form-control border-0 comment flex-row" 
@@ -32,12 +35,34 @@
           </div>
         </div>
       </div>
-    </main>
-    <div class="m-3 profile">
-      <div class="card">
-        <div class="card-header">
-          Hola <b *ngIf="user" class="bold">{{user.name}}</b>
+      <div class="d-flex flex-row flex-wrap profile-wrapper mt-4">
+        <div class="card w-100 m-3 border-0">
+          <div class="card-header border-0 d-flex">
+            <div class="image-wrapper">
+              <div class="image-profile rounded-circle">
+                <a [routerLink]=""><img [src]="user.avatar" alt="perfil" /></a>
+              </div>
+            </div> 
+            <div class="d-flex justify-content-center align-items-center flex-wrap">
+              <div class="col-md-12">
+                <a [routerLink]=""><b *ngIf="user" class="bold">{{user.username}}</b></a>
+              </div>
+              <div class="col-md-12">
+                <b *ngIf="user" class="bold small">{{user.name}}</b>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-1">
+            <div class="card bg-white">
+              <div class="card-header border-bottom-0 bg-white">
+                Notificaciones
+              </div>
+              <div class="card-body">
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
 </div>

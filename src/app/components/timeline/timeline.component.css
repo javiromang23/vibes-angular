@@ -3,6 +3,14 @@
     background-color: var(--background-color);
 }
 
+a {
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 .card-header {
     font-size: 16px;
     font-weight: 600;
@@ -68,11 +76,17 @@
     color: teal;
 }
 
-.profile {
-    position: absolute;
-    top: 80px;
-    right: 50px;
-    width: 25%;
+.publications-wrapper {
+    width: 65%;
+}
+
+.profile-wrapper {
+    width: 30%;
+    margin-left: 5%;
+}
+
+.profile-wrapper .card, .profile-wrapper .card-header {
+    background-color: #FAFAFA;
 }
 
 /*** Media queries ***/
@@ -88,7 +102,12 @@
 }
 
 @media (max-width: 768px) {
-
+    .profile-wrapper {
+        display: none!important;
+    }
+    .publications-wrapper {
+        width: 100%;
+    }
 }
 
 @media (max-width: 568px) {
