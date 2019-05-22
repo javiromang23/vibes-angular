@@ -98,6 +98,12 @@
     text-align: center;
 }
 
+.nav-link {
+    font-size: 25px;
+    margin: 0 15px;
+    padding: 0!important;
+}
+
 /* Media queries */
 
 @media (max-width: 568px) {
@@ -116,5 +122,17 @@
         top: 0;
         z-index: 99999999;
         width: 100vw;
+    }
+    .main-nav {
+        width: 100%!important;
+    }
+    .nav-link {
+        color: black;
+    }
+    .navbar-toggler {
+        display: none;
+    }
+    .btn-out {
+        font-size: 22px;
     }
 }

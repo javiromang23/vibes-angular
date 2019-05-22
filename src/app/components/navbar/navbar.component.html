@@ -1,31 +1,49 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
-  <a [routerLink]="['/timeline']" class="navbar-brand logo">Vibes</a>
-  <form>
-    <div class="input-group flex-row-reverse">
-      <input class="form-control" type="search" placeholder="Buscar...">
-      <div class="input-group-prepend">
-        <div class="input-group-text"><i class="fas fa-search"></i></div>
+  <div class="d-flex w-50 justify-content-around align-items-center main-nav">
+    <a [routerLink]="['/timeline']" class="navbar-brand logo">Vibes</a>
+    <form>
+      <div class="input-group flex-row-reverse">
+        <input class="form-control" type="search" placeholder="Buscar...">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-search"></i></div>
+        </div>
       </div>
+    </form>
+    <button class="btn d-md-none btn-out" (click)="logOut()"><i class="fas fa-sign-out-alt"></i></button>
+    <button class="navbar-toggler" type="button" aria-expanded="false" (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="menu">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse p-2" id="menu" [collapse]="!isCollapsed">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/timeline']"><i class="fas fa-home"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/explore']"><i class="far fa-compass"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/', username]"><i class="far fa-user"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logOut()"><i class="fas fa-sign-out-alt"></i></a>
+        </li>
+      </ul>
     </div>
-  </form>
-  <button class="navbar-toggler" type="button" aria-expanded="false" (click)="isCollapsed = !isCollapsed"
-    [attr.aria-expanded]="!isCollapsed" aria-controls="menu">
-      <i class="fas fa-bars"></i>
-  </button>
-  <div class="collapse navbar-collapse p-2" id="menu" [collapse]="!isCollapsed">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/timeline']">Inicio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/explore']">Explora</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/', username]">Perfil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="logOut()">Cerrar sesión</a>
-      </li>
-    </ul>
   </div>
 </nav>
+
+<ul class="navbar navbar-expand-lg bg-white mr-auto d-md-none d-sm-block fixed-bottom m-0 list-unstyled">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/timeline']"><i class="fas fa-home"></i></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/explore']"><i class="far fa-compass"></i></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" ><i class="far fa-plus-square"></i></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/', username]"><i class="far fa-user"></i></a>
+  </li>
+</ul>

@@ -148,6 +148,10 @@ a:hover {
         width: 70%;
     }
     .main {
-        margin-top: 2em;
+        margin: 3em 0;
+    }
+    .image-profile {
+        width: 40px;
+        height: 40px;
     }
 }
