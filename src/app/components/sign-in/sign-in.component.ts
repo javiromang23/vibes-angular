@@ -24,7 +24,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     if (this.token) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/timeline']);
     }
   }
 
@@ -35,6 +35,7 @@ export class SignInComponent implements OnInit {
         localStorage.setItem('ssid_session', JSON.stringify(this.token));
         localStorage.setItem('user_session', JSON.stringify(response.username));
         this.result = true;
+        this.router.navigate(['/timeline']);
       },
       error => {
         this.result = false;

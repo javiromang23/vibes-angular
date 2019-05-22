@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
+import { LikeService } from '../../services/like.service';
 import { Publication } from 'src/app/models/publication';
 import { DomSanitizer } from '@angular/platform-browser';
 import { User } from 'src/app/models/user';
@@ -21,6 +22,7 @@ export class TimelineComponent implements OnInit {
   constructor(
     private userService: UserService,
     private publicationService: PublicationService,
+    private likeService: LikeService,
     private router: Router,
     private sanitizer: DomSanitizer
   ) {
@@ -78,7 +80,15 @@ export class TimelineComponent implements OnInit {
         this.userService.getImage(publication.user.username, publication.user.avatar).subscribe(
           data => {
             publication.user.avatar = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
-            this.publications.push(publication);
+            this.likeService.getLikesByPublication(publication._id).subscribe(
+              res => {
+                publication.likes = res.total;
+                this.publications.push(publication);
+              },
+              error => {
+                console.log(error);
+              }
+            );
           },
           error => {
             console.log(error);
@@ -95,6 +105,17 @@ export class TimelineComponent implements OnInit {
     this.userService.getImage(user.username, user.avatar).subscribe(
       response => {
         user.avatar = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  saveLike(publication: Publication) {
+    this.likeService.saveLikePublication(publication._id).subscribe(
+      response => {
+        publication.likes++;
       },
       error => {
         console.log(error);

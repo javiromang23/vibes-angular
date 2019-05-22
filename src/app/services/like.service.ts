@@ -7,9 +7,10 @@ import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PublicationService {
+export class LikeService {
   public url: string;
   public headers: HttpHeaders;
+  public token: string;
 
   constructor(
     private http: HttpClient,
@@ -17,16 +18,16 @@ export class PublicationService {
   ) {
     this.url = Parameters.URL_API_VIBES;
     this.headers = new HttpHeaders().set('Content-Type', 'application/json');
+    this.token = this.userService.getToken();
   }
 
-  public getPublicationsFollows(): Observable<any> {
-    const headers = this.headers.set('Authorization', this.userService.token);
-    return this.http.get(this.url + 'publications/follows', {headers});
+  saveLikePublication(publicationId: string): Observable<any> {
+    const headers = this.headers.set('authorization', this.token);
+    return this.http.post(this.url + 'like/' + publicationId, null, {headers});
   }
 
-  public getImage(username: string, image: string): Observable<Blob> {
-    const headers = this.headers.set('Authorization', this.userService.token);
-    return this.http.get(this.url + 'publication/' + username + '/' + image,
-    { headers , responseType: 'blob' });
+  getLikesByPublication(publicationId: string): Observable<any> {
+    const headers = this.headers.set('Authorization', this.token);
+    return this.http.get(this.url + 'likes/' + publicationId, {headers});
   }
 }
