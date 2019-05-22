@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
+import { CommentService } from '../../services/comment.service';
 import { LikeService } from '../../services/like.service';
 import { Publication } from 'src/app/models/publication';
 import { DomSanitizer } from '@angular/platform-browser';
-import { User } from 'src/app/models/user';
+import { User } from '../../models/user';
+import {  } from '../../models/comment';
 
 @Component({
   selector: 'app-timeline',
@@ -18,17 +20,20 @@ export class TimelineComponent implements OnInit {
   public url: string;
   public total: string;
   public user: User;
+  public comments: Array<any>;
 
   constructor(
     private userService: UserService,
     private publicationService: PublicationService,
     private likeService: LikeService,
+    private commentService: CommentService,
     private router: Router,
     private sanitizer: DomSanitizer
   ) {
     this.token = userService.getToken();
     this.url = this.publicationService.url;
     this.publications = [];
+    this.comments = [];
   }
 
   ngOnInit() {
@@ -52,6 +57,7 @@ export class TimelineComponent implements OnInit {
       () => {
         publications.map((publication, index) => {
           this.getImageFile(publication, index);
+          this.getCommentsPublication(publication);
         });
         /* Ordenar por fecha de subida */
         this.publications.sort( (a, b) => {
@@ -138,6 +144,28 @@ export class TimelineComponent implements OnInit {
       response => {
         publication.likes--;
         publication.isLiked = false;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getCommentsPublication(publication: Publication) {
+    this.commentService.getCommentsPublication(publication._id).subscribe(
+      response => {
+        this.comments[publication._id] = response.comments;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  saveCommentPublication(publication: Publication, text: string) {
+    this.commentService.saveCommentPublication(publication._id, text).subscribe(
+      response => {
+        this.comments[publication._id].push(response.comment);
       },
       error => {
         console.log(error);

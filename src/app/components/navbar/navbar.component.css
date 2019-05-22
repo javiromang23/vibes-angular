@@ -110,4 +110,11 @@
     .form-control {
         width: 150px;
     }
+    nav {
+        position: fixed;
+        position: -webkit-sticky;
+        top: 0;
+        z-index: 99999999;
+        width: 100vw;
+    }
 }

@@ -46,13 +46,28 @@ a:hover {
     opacity: 0.8;
 }
 
+.see-more {
+    color: grey;
+    opacity: 0.6;
+}
+
+.see-more:hover {
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.btn:focus{
+    box-shadow: none;
+    outline: none;
+}
+
 .image img{
     width: 100%;
     object-fit: fill;
 }
 
 .panel-action button {
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .comment {
@@ -131,5 +146,8 @@ a:hover {
     }
     .comment {
         width: 70%;
+    }
+    .main {
+        margin-top: 2em;
     }
 }
