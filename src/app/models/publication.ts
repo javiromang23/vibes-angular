@@ -10,6 +10,7 @@ export class Publication {
         public description: string,
         public category: string,
         public mentions: Array<User>,
-        public likes: number
+        public likes: number,
+        public isLiked: boolean
     ) {}
 }

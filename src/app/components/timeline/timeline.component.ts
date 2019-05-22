@@ -83,6 +83,15 @@ export class TimelineComponent implements OnInit {
             this.likeService.getLikesByPublication(publication._id).subscribe(
               res => {
                 publication.likes = res.total;
+                this.likeService.getLikePublication(publication._id).subscribe(
+                  dataResponse => {
+                    publication.isLiked = true;
+                  },
+                  error => {
+                    console.log(error);
+                    publication.isLiked = false;
+                  }
+                );
                 this.publications.push(publication);
               },
               error => {
@@ -116,6 +125,19 @@ export class TimelineComponent implements OnInit {
     this.likeService.saveLikePublication(publication._id).subscribe(
       response => {
         publication.likes++;
+        publication.isLiked = true;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  deleteLike(publication: Publication) {
+    this.likeService.deleteLikePublication(publication._id).subscribe(
+      response => {
+        publication.likes--;
+        publication.isLiked = false;
       },
       error => {
         console.log(error);

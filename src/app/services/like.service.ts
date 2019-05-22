@@ -30,4 +30,14 @@ export class LikeService {
     const headers = this.headers.set('Authorization', this.token);
     return this.http.get(this.url + 'likes/' + publicationId, {headers});
   }
+
+  getLikePublication(publicationId: string): Observable<any> {
+    const headers = this.headers.set('Authorization', this.token);
+    return this.http.get(this.url + 'like/' + publicationId, {headers});
+  }
+
+  deleteLikePublication(publicationId: string): Observable<any> {
+    const headers = this.headers.set('Authorization', this.token);
+    return this.http.delete(this.url + 'like/' + publicationId, {headers});
+  }
 }

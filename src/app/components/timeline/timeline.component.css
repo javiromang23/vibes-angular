@@ -36,6 +36,16 @@ a:hover {
     position: absolute;
 }
 
+.image-profile-small{
+    width: 25px;
+    height: 25px;
+}
+
+.date-publication {
+    color: grey;
+    opacity: 0.8;
+}
+
 .image img{
     width: 100%;
     object-fit: fill;
@@ -69,11 +79,16 @@ a:hover {
     padding: 5px;
 }
 
+.comment:focus ~ .submit-comment {
+    opacity: 1;
+}
+
 .submit-comment {
     width: 15%;
     background-color: #FAFAFA;
     font-weight: 600;
-    color: teal;
+    color: #3897f0;
+    opacity: 0.6;
 }
 
 .publications-wrapper {
