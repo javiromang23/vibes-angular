@@ -123,16 +123,31 @@
         z-index: 99999999;
         width: 100vw;
     }
+}
+
+@media (max-width: 1980px) {
     .main-nav {
-        width: 100%!important;
+        width: 70%!important;
     }
-    .nav-link {
-        color: black;
+}
+
+@media (max-width: 1366px) {
+    .main-nav {
+        width: 90%!important;
     }
+}
+
+@media (max-width: 768px) {
     .navbar-toggler {
         display: none;
     }
     .btn-out {
         font-size: 22px;
+    }
+    .main-nav {
+        width: 100%!important;
+    }
+    .nav-link {
+        color: black;
     }
 }
