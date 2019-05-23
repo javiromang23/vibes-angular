@@ -7,7 +7,7 @@ import { LikeService } from '../../services/like.service';
 import { Publication } from 'src/app/models/publication';
 import { DomSanitizer } from '@angular/platform-browser';
 import { User } from '../../models/user';
-import {  } from '../../models/comment';
+import { Comment } from '../../models/comment';
 
 @Component({
   selector: 'app-timeline',
@@ -17,7 +17,6 @@ import {  } from '../../models/comment';
 export class TimelineComponent implements OnInit {
   public token: string;
   public publications: Array<Publication>;
-  public url: string;
   public total: string;
   public user: User;
   public comments: Array<any>;
@@ -31,7 +30,6 @@ export class TimelineComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {
     this.token = userService.getToken();
-    this.url = this.publicationService.url;
     this.publications = [];
     this.comments = [];
   }

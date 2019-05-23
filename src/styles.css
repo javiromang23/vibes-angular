@@ -22,5 +22,15 @@ body {
 }
 
 a {
-    cursor: pointer;
+    cursor: pointer!important;
+    color: black!important;
+}
+
+a:hover {
+    text-decoration: none!important;
+}
+
+/* main */
+.main {
+    background-color: var(--background-color);
 }

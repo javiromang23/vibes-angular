@@ -1,0 +1,78 @@
+<app-navbar></app-navbar>
+<div class="container-fluid p-0 main">
+    <main class="container d-flex flex-column main-container" *ngIf="user">
+        <header class="container-fluid d-flex flex-column pb-4">
+            <div class="col-rs d-flex flex-row justify-content-around pt-4">
+                <div class="image-wrapper d-flex justify-content-center align-self-center">
+                    <div class="image rounded-circle mr-0">
+                        <img [src]="user.avatar" alt="Foto de perfil" class="img-fluid" *ngIf="user.avatar">
+                    </div>
+                </div>
+                <div class="info d-flex flex-column align-self-center p-4">
+                    <div class="username d-flex flex-row align-content-center flex-wrap">
+                        <div class="title">
+                            <h1>{{user.username}}</h1>
+                        </div>
+                        <div class="edit" *ngIf="username == user.username">
+                            <a class="btn btn-custom" [routerLink]="['/edit', user.username]">Editar perfil</a>
+                        </div>
+                    </div>
+                    <div class="counters d-none d-md-flex flex-md-row">
+                        <div class="publications">
+                            <p>{{counters.publications}} <span>Publicaciones</span></p>
+                        </div>
+                        <div class="followers">
+                            <p>{{counters.followers}} <span>Seguidores</span></p>
+                        </div>
+                        <div class="followings">
+                            <p>{{counters.follows}} <span>Seguidos</span></p>
+                        </div>
+                    </div>
+                    <div class="info-optional">
+                        <div class="name">
+                            <p>{{user.name}}</p>
+                        </div>
+                        <div class="bio">
+                            <p>{{user.bio}}</p>
+                        </div>
+                        <div class="web">
+                            <a href="{{user.website}}">{{user.website}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="counters counters-sm d-flex justify-content-center align-items-center d-sm-none border text-center">
+                <div class="publications">
+                    <p>{{counters.publications}} <span>Publicaciones</span></p>
+                </div>
+                <div class="followers">
+                    <p>{{counters.followers}} <span>Seguidores</span></p>
+                </div>
+                <div class="followings">
+                    <p>{{counters.follows}} <span>Seguidos</span></p>
+                </div>
+            </div>
+        </header>
+        <main>
+            <tabset [justified]="true">
+                    <tab customClass="customClass">
+                        <ng-template tabHeading>
+                            <span class="tag-wrapp"><i class="fa fa-table icon-tag"></i><span class="d-none d-md-inline text-tag"> PUBLICACIONES</span></span>
+                        </ng-template>
+                        <div class="publications-wrapper d-flex flex-row flex-wrap" *ngIf="publications">
+                            <div class="publication w-50" *ngFor="let publication of publications">
+                                <div class="image">
+                                    <!-- <img src="{{ url + 'image-publication/' + publication.image}}" class="img-fluid"> -->
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab customClass="customClass2">
+                        <ng-template tabHeading>
+                            <span class="tag-wrapp"><i class="fa fa-tags icon-tag"></i><span class="d-none d-md-inline text-tag"> ETIQUETADAS</span></span>
+                        </ng-template>
+                    </tab>
+            </tabset>
+        </main>
+    </main>
+</div>

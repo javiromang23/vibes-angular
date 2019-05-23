@@ -1,0 +1,239 @@
+/*** Header ***/
+.main-container {
+    width: 35%;
+}
+
+.image-wrapper {
+    width: 30%;
+}
+
+.image {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    background-color: #fff;
+}
+
+.image img{
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.info {
+    width: 70%;
+}
+
+/* Publicaciones */
+.publication .image {
+    width: 100%;
+    height: 400px;
+}
+
+.publication .image img {
+    object-fit: fill;
+}
+
+/* Bloque username y btn */
+
+.username h1{
+    font-weight: 300;
+    font-size: 32px;
+    color: #262626;
+}
+
+.username .edit .btn {
+    margin: 5px 10px;
+}
+
+.username .btn-custom {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    font-weight: 600;
+    padding: 2.5px 10px;
+}
+
+.username .btn-custom:hover {
+    transform: scale(1.05);
+    transition: .2s ease-in;
+}
+
+/* Contadores */
+
+.counters {
+    padding-top: 10px;
+    font-size: 16px;
+}
+
+.counters > div {
+    padding: 0px 10px;
+}
+
+.counters > div:first-child {
+    padding-left: 0px;
+}
+
+.counters div p {
+    font-weight: 600;
+}
+
+.counters div p > span {
+    font-weight: normal;
+}
+
+/* Información adicional */
+
+.info-optional > div p {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.info-optional .name {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.info-optional .web a{
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.info-optional .web a:hover {
+    text-decoration: none;
+}
+
+/** Menu tabs **/
+::ng-deep .customClass > a,
+::ng-deep .customClass2 > a {
+    background-color:#fafafa !important;
+    border-top-left-radius: 0!important;
+    border-top-right-radius: 0!important;
+    padding: 15px!important;
+    font-weight: 600!important;
+    font-size: 16px!important;
+    color: #999!important;
+}
+
+::ng-deep .customClass > a,
+::ng-deep .customClass2 > a {
+    border: none!important;
+    border-top: 1px solid #efefef!important;
+}
+
+::ng-deep .customClass > a.active,
+::ng-deep .customClass2 > a.active {
+    color: #262626!important;
+    border: none!important;
+    border-top: 1px solid #262626!important;
+}
+
+.tag-wrapp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-tag {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.icon-tag {
+    font-size: 28px;
+    padding-right: 2px;
+}
+
+/*** Media queries ***/
+
+@media (max-width: 768px) {
+    .container {
+        height: auto;
+    }
+    .container-fluid {
+        padding: 0;
+    }
+    .publication .image img {
+        object-fit: cover;
+    }
+    .publication .image {
+        height: 250px;
+    }
+    .main-container {
+        width: 100%;
+    }
+    .main-container > header {
+        padding-bottom: 0px!important;
+    }
+    .image {
+        width: 125px;
+        height: 125px;
+    }
+}
+
+@media (max-width: 568px) {
+    .container {
+        padding: 0;
+    }
+    .col-rs {
+        padding: 1rem;
+    }
+    .username .edit .btn {
+        margin: 10px 0px;
+    }
+    .image-wrapper{
+        width: 25%;
+    }
+    .info {
+        width: 75%;
+    }
+    .info-optional > div p, .info-optional .web a{
+        font-size: 14px;
+    }
+    .info-optional > div:first-child p {
+        font-size: 15px;
+    }
+    .username .edit, .username .edit .btn {
+        width: 100%;
+    }
+    .counters-sm{
+        padding: 0;
+    }
+    .counters-sm div{
+        width: 33%;
+        padding: 10px 20px!important;
+        display: flex;
+        justify-content: center;
+    }
+    .counters-sm div p {
+        margin: 0;
+    }
+    ::ng-deep .customClass > a,
+    ::ng-deep .customClass2 > a {
+        background-color:#fafafa !important;
+        border: none !important;
+        padding: 20px!important;
+        font-weight: 600!important;
+        font-size: 16px!important;
+    }
+    ::ng-deep .customClass > a.active,
+    ::ng-deep .customClass2 > a.active {
+        border-top: 1px solid #262626!important;
+    }
+    ::ng-deep .nav-tabs {
+        border: none;
+    }
+    .publication .image img {
+        object-fit: cover;
+    }
+    .image-wrapper {
+        width: auto;
+    }
+    .main-container {
+        padding-top: 3em;
+    }
+    .username > .title h1{
+        font-size: 24px;
+    }
+}

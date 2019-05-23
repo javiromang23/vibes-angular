@@ -6,11 +6,11 @@
           <div class="card-header bg-white d-flex flex-fill border-bottom-0">
             <div class="image-wrapper">
               <div class="image-profile rounded-circle">
-                <a [routerLink]=""><img [src]="publication.user.avatar" alt="perfil" /></a>
+                <a [routerLink]="['/u/' + publication.user.username]"><img [src]="publication.user.avatar" alt="perfil" /></a>
               </div>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-              <a [routerLink]="">{{publication.user.username}}</a>
+              <a [routerLink]="['/u/' + publication.user.username]">{{publication.user.username}}</a>
             </div>
             <div class="small bold d-flex justify-content-end align-items-center flex-fill text-right date-publication">
               {{publication.createdAt | date:'HH:mm dd/MM/yy '}}
@@ -67,12 +67,12 @@
           <div class="card-header border-0 d-flex">
             <div class="image-wrapper">
               <div class="image-profile rounded-circle" *ngIf="user">
-                <a [routerLink]=""><img [src]="user.avatar" alt="perfil" /></a>
+                <a [routerLink]="['/u/' + user.username]"><img [src]="user.avatar" alt="perfil" /></a>
               </div>
             </div> 
             <div class="d-flex justify-content-center align-items-center flex-wrap">
               <div class="col-md-12">
-                <a [routerLink]=""><b *ngIf="user" class="bold">{{user.username}}</b></a>
+                <a [routerLink]="['/u/' +user.username]"><b *ngIf="user" class="bold">{{user.username}}</b></a>
               </div>
               <div class="col-md-12">
                 <b *ngIf="user" class="bold small">{{user.name}}</b>
