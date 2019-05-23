@@ -19,6 +19,11 @@ export class PublicationService {
     this.headers = new HttpHeaders().set('Content-Type', 'application/json');
   }
 
+  public getPublicationsUser(username: string): Observable<any> {
+    const headers = this.headers.set('Authorization', this.userService.token);
+    return this.http.get(this.url + 'publications/' + username, {headers});
+  }
+
   public getPublicationsFollows(): Observable<any> {
     const headers = this.headers.set('Authorization', this.userService.token);
     return this.http.get(this.url + 'publications/follows', {headers});

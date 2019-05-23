@@ -32,6 +32,7 @@ export class TimelineComponent implements OnInit {
     this.token = userService.getToken();
     this.publications = [];
     this.comments = [];
+    this.user = new User('', '', '', '', '', '', new Date(), '', '', '', '');
   }
 
   ngOnInit() {
@@ -54,7 +55,7 @@ export class TimelineComponent implements OnInit {
       },
       () => {
         publications.map((publication, index) => {
-          this.getImageFile(publication, index);
+          this.getImageFile(publication);
           this.getCommentsPublication(publication);
         });
         /* Ordenar por fecha de subida */
@@ -77,7 +78,7 @@ export class TimelineComponent implements OnInit {
     );
   }
 
-  getImageFile(publication: Publication, index) {
+  getImageFile(publication: Publication) {
     this.publicationService.getImage(publication.user.username, publication.image).subscribe(
       response => {
         publication.image = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
@@ -92,7 +93,7 @@ export class TimelineComponent implements OnInit {
                     publication.isLiked = true;
                   },
                   error => {
-                    console.log(error);
+                    // console.log(error);
                     publication.isLiked = false;
                   }
                 );

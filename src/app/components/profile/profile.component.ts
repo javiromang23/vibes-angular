@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
       followers: 4,
       follows: 20
     };
+    this.publications = [];
   }
 
   ngOnInit() {
@@ -38,6 +39,7 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/sign-in']);
     }
     this.loadProfile();
+    this.loadPublications();
   }
 
   loadProfile() {
@@ -62,5 +64,40 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
+  loadPublications() {
+    let publications;
+    this.publicationService.getPublicationsUser(this.username).subscribe(
+      response => {
+        publications = response.publications;
+        console.log(publications);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        publications.map((publication, index) => {
+          this.getImageFile(publication);
+        });
+        /* Ordenar por fecha de subida */
+        this.publications.sort( (a, b) => {
+          return a.createdAt.getTime() - b.createdAt.getTime();
+        });
+      }
+    );
+  }
+
+  getImageFile(publication: Publication) {
+    this.publicationService.getImage(publication.user.username, publication.image).subscribe(
+      data => {
+        publication.image = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
+        this.publications.push(publication);
+      },
+      error => {
+        console.log(error);
+      },
+    );
+  }
+
 
 }

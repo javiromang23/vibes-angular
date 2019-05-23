@@ -53,16 +53,18 @@
                 </div>
             </div>
         </header>
-        <main>
+        <main class="pb-5">
             <tabset [justified]="true">
                     <tab customClass="customClass">
                         <ng-template tabHeading>
                             <span class="tag-wrapp"><i class="fa fa-table icon-tag"></i><span class="d-none d-md-inline text-tag"> PUBLICACIONES</span></span>
                         </ng-template>
-                        <div class="publications-wrapper d-flex flex-row flex-wrap" *ngIf="publications">
-                            <div class="publication w-50" *ngFor="let publication of publications">
-                                <div class="image">
-                                    <!-- <img src="{{ url + 'image-publication/' + publication.image}}" class="img-fluid"> -->
+                        <div class="d-flex justify-content-center">
+                            <div class="publications-wrapper d-flex flex-row flex-wrap" *ngIf="publications">
+                                <div class="publication w-25 bg-white m-2 d-flex align-items-center" *ngFor="let publication of publications">
+                                    <div class="card border-0">
+                                        <img [src]="publication.image" class="img-fluid">
+                                    </div>
                                 </div>
                             </div>
                         </div>
