@@ -5,11 +5,11 @@
       <div class="input-group flex-row-reverse">
         <input class="form-control" type="search" placeholder="Buscar...">
         <div class="input-group-prepend">
-          <div class="input-group-text"><i class="fas fa-search"></i></div>
+          <div class="input-group-text"><i class="fa fa-search"></i></div>
         </div>
       </div>
     </form>
-    <button class="btn d-md-none btn-out" (click)="logOut()"><i class="fas fa-sign-out-alt"></i></button>
+    <button class="btn d-md-none btn-out" (click)="logOut()"><i class="fa fa-sign-out"></i></button>
     <button class="navbar-toggler" type="button" aria-expanded="false" (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed" aria-controls="menu">
         <i class="fas fa-bars"></i>
@@ -17,16 +17,19 @@
     <div class="collapse navbar-collapse p-2" id="menu" [collapse]="!isCollapsed">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/timeline']"><i class="fas fa-home"></i></a>
+          <a class="nav-link" [routerLink]="['/timeline']"><i class="fa fa-home"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/explore']"><i class="far fa-compass"></i></a>
+          <a class="nav-link" [routerLink]="['/explore']"><i class="fa fa-compass"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/', username]"><i class="far fa-user"></i></a>
+          <a class="nav-link" [routerLink]="['/', username]"><i class="fa fa-heart-o"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="logOut()"><i class="fas fa-sign-out-alt"></i></a>
+          <a class="nav-link" [routerLink]="['/', username]"><i class="fa fa-user"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logOut()"><i class="fa fa-sign-out"></i></a>
         </li>
       </ul>
     </div>
@@ -35,15 +38,18 @@
 
 <ul class="navbar navbar-expand-lg bg-white mr-auto d-md-none d-sm-block fixed-bottom m-0 list-unstyled">
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/timeline']"><i class="fas fa-home"></i></a>
+    <a class="nav-link" [routerLink]="['/timeline']"><i class="fa fa-home"></i></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/explore']"><i class="far fa-compass"></i></a>
+    <a class="nav-link" [routerLink]="['/explore']"><i class="fa fa-compass"></i></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" ><i class="far fa-plus-square"></i></a>
+    <a class="nav-link" [routerLink]="['/explore']"><i class="fa fa-plus-square"></i></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/', username]"><i class="far fa-user"></i></a>
+    <a class="nav-link" [routerLink]="['/', username]"><i class="fa fa-heart-o"></i></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/', username]"><i class="fa fa-user"></i></a>
   </li>
 </ul>

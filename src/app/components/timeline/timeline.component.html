@@ -26,14 +26,14 @@
               
               <!-- Like -->
               <div *ngIf="!publication.isLiked; else notLiked">
-                <button class="btn" (click)="saveLike(publication)"><i class="far fa-heart"></i></button>
+                <button class="btn" (click)="saveLike(publication)"><i class="fa fa-heart-o"></i></button>
               </div>
               <!-- Not liked -->
               <ng-template #notLiked>
-                <button class="btn" (click)="deleteLike(publication)"><i class="fas fa-heart" style="color: red"></i></button>
+                <button class="btn" (click)="deleteLike(publication)"><i class="fa fa-heart" style="color: red"></i></button>
               </ng-template>
 
-              <button class="btn"><i class="far fa-comment"></i></button>
+              <button class="btn"><i class="fa fa-comments-o"></i></button>
               <div *ngIf="publication.likes" class="pl-2">Le gusta a <b class="bold">{{publication.likes}} personas.</b></div>
             </div>
             <div class="panel-action pl-1 pb-3 d-flex justify-content-left align-items-center flex-wrap">
