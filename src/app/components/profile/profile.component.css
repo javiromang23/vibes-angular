@@ -100,13 +100,10 @@
     font-size: 16px;
 }
 
-.info-optional .web a{
+.info-optional .web, .info-optional .web a{
     font-weight: 600;
     font-size: 15px;
-}
-
-.info-optional .web a:hover {
-    text-decoration: none;
+    color: #007bff!important;
 }
 
 /** Menu tabs **/
@@ -206,11 +203,13 @@
 }
 
 @media (max-width: 568px) {
-    .container {
-        padding: 0;
-    }
     .col-rs {
         padding: 1rem;
+        padding-top: 3rem!important;
+        padding-bottom: 0rem!important;
+    }
+    .container {
+        padding: 0;
     }
     .username .edit .btn {
         margin: 10px 0px;
