@@ -13,26 +13,26 @@
                         <div class="title">
                             <h1>{{user.username}}</h1>
                         </div>
-                        <div class="edit" *ngIf="username == user.username">
+                        <div class="edit" *ngIf="usernameProfile == user.username">
                             <a class="btn btn-custom" [routerLink]="['/edit', user.username]">Editar perfil</a>
                         </div>
                     </div>
-                    <div class="counters d-none d-md-flex flex-md-row">
+                    <div class="counters d-none d-md-flex flex-md-row" *ngIf="counters">
                         <div class="publications">
                             <p>{{counters.publications}} <span>Publicaciones</span></p>
                         </div>
                         <div class="followers">
                             <p>{{counters.followers}} <span>Seguidores</span></p>
                         </div>
-                        <div class="followings">
-                            <p>{{counters.follows}} <span>Seguidos</span></p>
+                        <div class="followeds">
+                            <p>{{counters.followeds}} <span>Seguidos</span></p>
                         </div>
                     </div>
                     <div class="info-optional d-none d-md-block">
-                        <div class="name">
+                        <div class="name" *ngIf="user.name">
                             <p>{{user.name}}</p>
                         </div>
-                        <div class="bio">
+                        <div class="bio" *ngIf="user.bio">
                             <p>{{user.bio}}</p>
                         </div>
                         <div class="web d-flex justify-content-start align-items-center" *ngIf="user.website">
@@ -42,25 +42,25 @@
                 </div>
             </div>
             <div class="info-optional d-md-none p-4">
-                <div class="name">
+                <div class="name" *ngIf="user.name">
                     <p>{{user.name}}</p>
                 </div>
-                <div class="bio">
+                <div class="bio" *ngIf="user.bio">
                     <p>{{user.bio}}</p>
                 </div>
                 <div class="web d-flex justify-content-start align-items-center" *ngIf="user.website">
                     <i class="fa fa-globe" style="font-size: 25px; margin-right: 0.25rem"></i><a href="http://{{user.website}}" target="_blank">{{user.website}}</a>
                 </div>
             </div>
-            <div class="counters counters-sm d-flex justify-content-center align-items-center d-sm-none border text-center">
+            <div class="counters counters-sm d-flex justify-content-center align-items-center d-sm-none border text-center" *ngIf="counters">
                 <div class="publications">
                     <p>{{counters.publications}} <span>Publicaciones</span></p>
                 </div>
                 <div class="followers">
                     <p>{{counters.followers}} <span>Seguidores</span></p>
                 </div>
-                <div class="followings">
-                    <p>{{counters.follows}} <span>Seguidos</span></p>
+                <div class="followeds">
+                    <p>{{counters.followeds}} <span>Seguidos</span></p>
                 </div>
             </div>
         </header>

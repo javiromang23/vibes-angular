@@ -264,6 +264,7 @@
     }
     .main-container {
         padding-top: 3em;
+        padding-bottom: 1.5em;
     }
     .username > .title h1{
         font-size: 24px;

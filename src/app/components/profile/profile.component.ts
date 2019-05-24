@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
 import { Publication } from 'src/app/models/publication';
@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LikeService } from '../../services/like.service';
 import { CommentService } from '../../services/comment.service';
+import { FollowService } from '../../services/follow.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,24 +18,27 @@ export class ProfileComponent implements OnInit {
   public token: string;
   public publications: Array<Publication>;
   public user: User;
-  public username: string;
+  public usernameLoggedIn: string;
+  public usernameProfile: string;
   public counters: any;
 
   constructor(
     private userService: UserService,
     private publicationService: PublicationService,
     private likeService: LikeService,
+    private followService: FollowService,
     private commentService: CommentService,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private activatedRoute: ActivatedRoute
   ) {
     this.token = userService.getToken();
-    this.username = userService.getUsernameStored();
-    this.counters = {
-      publications: 4,
-      followers: 4,
-      follows: 20
-    };
+    this.usernameLoggedIn = userService.getUsernameStored();
+    this.activatedRoute.params.subscribe(params => {
+      this.usernameProfile = params.username;
+      console.log(params);
+  });
+    this.counters = {};
     this.publications = [];
   }
 
@@ -47,10 +51,11 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfile() {
-    this.userService.getUser(this.userService.getUsernameStored()).subscribe(
+    this.userService.getUser(this.usernameProfile).subscribe(
       data => {
         this.getAvatarUser(data.user);
         this.user = data.user;
+        this.getCounters();
       },
       error => {
         console.log(error);
@@ -71,9 +76,10 @@ export class ProfileComponent implements OnInit {
 
   loadPublications() {
     let publications;
-    this.publicationService.getPublicationsUser(this.username).subscribe(
+    this.publicationService.getPublicationsUser(this.usernameProfile).subscribe(
       response => {
         publications = response.publications;
+        this.counters.publications = response.total;
       },
       error => {
         console.log(error);
@@ -118,6 +124,27 @@ export class ProfileComponent implements OnInit {
       },
       error => {
         console.log(error);
+      }
+    );
+  }
+
+  getCounters() {
+    this.followService.getFollowers(this.usernameProfile).subscribe(
+      response => {
+        this.counters.followers = response.total;
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.followService.getFolloweds(this.usernameProfile).subscribe(
+          res => {
+            this.counters.followeds = res.total;
+          },
+          err => {
+            console.log(err);
+          }
+        );
       }
     );
   }
