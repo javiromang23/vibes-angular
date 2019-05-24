@@ -43,8 +43,8 @@
     background: #FFF;
 }
 
-.card-footer p {
-    color: #999;
+.card-footer p, .card-footer p > a {
+    color: #999!important;
 }
 
 .card-footer p > a {
@@ -54,7 +54,7 @@
 
 .card-footer p > a:hover {
     text-decoration: none;
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.8)!important;
 }
 
 .link-login {
@@ -62,8 +62,8 @@
     font-size: 13px;
 }
 
-.link-login a:hover {
-    text-decoration: none;
+a {
+    color: var(--primary)!important;
 }
 
 .link-login:first-child {

@@ -32,8 +32,8 @@ export class SignInComponent implements OnInit {
     this.userService.signIn(this.user).subscribe(
       response => {
         this.token = response.token;
-        localStorage.setItem('ssid_session', JSON.stringify(this.token));
-        localStorage.setItem('user_session', JSON.stringify(response.username));
+        localStorage.setItem('token_session', JSON.stringify(this.token));
+        localStorage.setItem('ssid_session', JSON.stringify(response.userId));
         this.result = true;
         this.router.navigate(['/timeline']);
       },

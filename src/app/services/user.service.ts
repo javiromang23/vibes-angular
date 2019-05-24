@@ -11,12 +11,14 @@ export class UserService {
   public url: string;
   public headers: HttpHeaders;
   public token: string;
+  public userId: string;
 
   constructor(
     private http: HttpClient
   ) {
     this.url = Parameters.URL_API_VIBES;
     this.headers = new HttpHeaders().set('Content-Type', 'application/json');
+    this.userId = this.getUserId();
   }
 
   /** Método para registrarse */
@@ -33,10 +35,16 @@ export class UserService {
     return this.http.post(this.url + 'signIn', params, {headers});
   }
 
-  /** Método para obtener un usuario */
+  /** Método para obtener un usuario por nombre de usuario */
   getUser(username: string): Observable<any> {
     const headers = this.headers.set('Authorization', this.getToken());
     return this.http.get(this.url + 'user/' + username, {headers});
+  }
+
+  /** Método para obtener un usuario */
+  getUserById(id: string): Observable<any> {
+    const headers = this.headers.set('Authorization', this.getToken());
+    return this.http.get(this.url + 'userById/' + id, {headers});
   }
 
   /** Método para modificar un usuario */
@@ -59,7 +67,7 @@ export class UserService {
 
   /** Método para obtener el token del localStorage */
   getToken() {
-    const token = JSON.parse(localStorage.getItem('ssid_session'));
+    const token = JSON.parse(localStorage.getItem('token_session'));
     if (!token) {
       this.token = null;
     } else {
@@ -69,8 +77,13 @@ export class UserService {
   }
 
   /** Método para conseguir el username del localstorage */
-  getUsernameStored() {
-    const username = JSON.parse(localStorage.getItem('user_session'));
-    return username;
+  getUserId() {
+    const userId = JSON.parse(localStorage.getItem('ssid_session'));
+    if (!userId) {
+      this.userId = null;
+    } else {
+      this.userId = userId;
+    }
+    return userId;
   }
 }

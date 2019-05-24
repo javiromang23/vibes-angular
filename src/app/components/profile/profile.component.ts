@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   public token: string;
   public publications: Array<Publication>;
   public user: User;
-  public usernameLoggedIn: string;
+  public userLoggedIn: User;
   public usernameProfile: string;
   public counters: any;
 
@@ -33,10 +33,8 @@ export class ProfileComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.token = userService.getToken();
-    this.usernameLoggedIn = userService.getUsernameStored();
     this.activatedRoute.params.subscribe(params => {
       this.usernameProfile = params.username;
-      console.log(params);
   });
     this.counters = {};
     this.publications = [];
@@ -46,8 +44,22 @@ export class ProfileComponent implements OnInit {
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }
-    this.loadProfile();
-    this.loadPublications();
+    this.getUserLoggedIn();
+  }
+
+  getUserLoggedIn() {
+    this.userService.getUserById(this.userService.userId).subscribe(
+      response => {
+        this.userLoggedIn = response.user;
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.loadProfile();
+        this.loadPublications();
+      }
+    );
   }
 
   loadProfile() {
@@ -148,6 +160,5 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-
 
 }

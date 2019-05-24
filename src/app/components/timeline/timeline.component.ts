@@ -20,6 +20,7 @@ export class TimelineComponent implements OnInit {
   public total: string;
   public user: User;
   public comments: Array<any>;
+  public userLoggedIn: User;
 
   constructor(
     private userService: UserService,
@@ -39,8 +40,22 @@ export class TimelineComponent implements OnInit {
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }
-    this.loadProfile();
-    this.loadPublications();
+    this.getUserLoggedIn();
+  }
+
+  async getUserLoggedIn() {
+    await this.userService.getUserById(this.userService.userId).subscribe(
+      response => {
+        this.userLoggedIn = response.user;
+      },
+      error => {
+        console.error(error);
+      },
+      () => {
+        this.loadProfile();
+        this.loadPublications();
+      }
+    );
   }
 
   loadPublications() {
@@ -51,7 +66,7 @@ export class TimelineComponent implements OnInit {
         this.total = response.total;
       },
       error => {
-        console.log(error);
+        console.error(error);
       },
       () => {
         publications.map((publication, index) => {
@@ -67,13 +82,13 @@ export class TimelineComponent implements OnInit {
   }
 
   loadProfile() {
-    this.userService.getUser(this.userService.getUsernameStored()).subscribe(
+    this.userService.getUser(this.userLoggedIn.username).subscribe(
       data => {
         this.getAvatarUser(data.user);
         this.user = data.user;
       },
       error => {
-        console.log(error);
+        console.error(error);
       }
     );
   }
@@ -100,17 +115,17 @@ export class TimelineComponent implements OnInit {
                 this.publications.push(publication);
               },
               error => {
-                console.log(error);
+                console.error(error);
               }
             );
           },
           error => {
-            console.log(error);
+            console.error(error);
           }
         );
       },
       error => {
-        console.log(error);
+        console.error(error);
       }
     );
   }
@@ -121,7 +136,7 @@ export class TimelineComponent implements OnInit {
         user.avatar = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
       },
       error => {
-        console.log(error);
+        console.error(error);
       }
     );
   }
@@ -133,7 +148,7 @@ export class TimelineComponent implements OnInit {
         publication.isLiked = true;
       },
       error => {
-        console.log(error);
+        console.error(error);
       }
     );
   }
@@ -145,7 +160,7 @@ export class TimelineComponent implements OnInit {
         publication.isLiked = false;
       },
       error => {
-        console.log(error);
+        console.error(error);
       }
     );
   }
@@ -156,7 +171,7 @@ export class TimelineComponent implements OnInit {
         this.comments[publication._id] = response.comments;
       },
       error => {
-        console.log(error);
+        console.error(error);
       }
     );
   }
@@ -167,7 +182,7 @@ export class TimelineComponent implements OnInit {
         this.comments[publication._id].push(response.comment);
       },
       error => {
-        console.log(error);
+        console.error(error);
       }
     );
   }

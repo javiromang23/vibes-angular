@@ -11,7 +11,7 @@ footer span {
 
 footer a:hover {
     text-decoration: none;
-    color: var(--main-color);
+    color: var(--main-color)!important;
     transform: scale(1.05);
     transition: .2s ease-in-out;
 }

@@ -13,7 +13,7 @@
                         <div class="title">
                             <h1>{{user.username}}</h1>
                         </div>
-                        <div class="edit" *ngIf="usernameProfile == user.username">
+                        <div class="edit" *ngIf="userLoggedIn._id == user._id">
                             <a class="btn btn-custom" [routerLink]="['/edit', user.username]">Editar perfil</a>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ import { UserService } from '../../services/user.service';
 })
 export class NavbarComponent implements OnInit {
 
-  public username: string;
+  public userLoggedIn: User;
 
   constructor(
     private userService: UserService,
@@ -17,7 +18,18 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.username = this.userService.getUsernameStored();
+    this.getUserLoggedIn();
+  }
+
+  getUserLoggedIn() {
+    this.userService.getUserById(this.userService.userId).subscribe(
+      response => {
+        this.userLoggedIn = response.user;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   logOut() {
