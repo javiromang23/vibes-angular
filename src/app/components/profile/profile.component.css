@@ -36,6 +36,11 @@
     object-fit: fill;
 }
 
+.publication {
+    margin: 0.3%!important;
+    width: 24.4%;
+}
+
 /* Bloque username y btn */
 
 .username h1{
@@ -145,8 +150,32 @@
     padding-right: 2px;
 }
 
-/*** Media queries ***/
+.link-publication:hover > .card > img ~ .overlay {
+    background-color: rgb(153,153,153, 0.3);
+    visibility: visible!important;
+}
 
+.link-publication:hover > .card > img {
+    filter: blur(2px);
+}
+
+.text-overlay {
+    font-size: 25px;
+    color: #fff;
+}
+
+/*** Media queries ***/
+@media (max-width: 1366px) {
+    .main-container {
+        width: 60%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-container {
+        width: 100%;
+    }
+}
 @media (max-width: 768px) {
     .container {
         height: auto;
@@ -158,11 +187,8 @@
         object-fit: cover;
     }
     .publication {
-        width: 50%!important;
-        margin: 0!important;
-    }
-    .publication .card {
-        margin: 5px!important;
+        width: 32.7%!important;
+        margin: 0.3%!important;
     }
     .publication .image {
         height: 250px;
