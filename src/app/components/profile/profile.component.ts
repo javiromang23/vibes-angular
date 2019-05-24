@@ -5,6 +5,8 @@ import { PublicationService } from '../../services/publication.service';
 import { Publication } from 'src/app/models/publication';
 import { User } from 'src/app/models/user';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LikeService } from '../../services/like.service';
+import { CommentService } from '../../services/comment.service';
 
 @Component({
   selector: 'app-profile',
@@ -21,6 +23,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private publicationService: PublicationService,
+    private likeService: LikeService,
+    private commentService: CommentService,
     private router: Router,
     private sanitizer: DomSanitizer
   ) {
@@ -70,7 +74,6 @@ export class ProfileComponent implements OnInit {
     this.publicationService.getPublicationsUser(this.username).subscribe(
       response => {
         publications = response.publications;
-        console.log(publications);
       },
       error => {
         console.log(error);
@@ -91,11 +94,31 @@ export class ProfileComponent implements OnInit {
     this.publicationService.getImage(publication.user.username, publication.image).subscribe(
       data => {
         publication.image = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
-        this.publications.push(publication);
+        this.likeService.getLikesByPublication(publication._id).subscribe(
+          res => {
+            publication.likes = res.total;
+          },
+          error => {
+            console.log(error);
+          }
+        );
+        this.getCommentsPublication(publication);
       },
       error => {
         console.log(error);
       },
+    );
+  }
+
+  getCommentsPublication(publication: Publication) {
+    this.commentService.getCommentsPublication(publication._id).subscribe(
+      response => {
+        publication.comments = response.total;
+        this.publications.push(publication);
+      },
+      error => {
+        console.log(error);
+      }
     );
   }
 

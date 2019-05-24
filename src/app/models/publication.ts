@@ -11,6 +11,7 @@ export class Publication {
         public category: string,
         public mentions: Array<User>,
         public likes: number,
-        public isLiked: boolean
+        public isLiked: boolean,
+        public comments: number
     ) {}
 }

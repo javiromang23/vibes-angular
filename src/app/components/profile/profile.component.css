@@ -156,7 +156,7 @@
 }
 
 .link-publication:hover > .card > img {
-    filter: blur(2px);
+    filter: blur(1px);
 }
 
 .text-overlay {
@@ -268,5 +268,8 @@
     }
     .username > .title h1{
         font-size: 24px;
+    }
+    .text-overlay {
+        font-size: 18px;
     }
 }
