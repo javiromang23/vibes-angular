@@ -21,6 +21,7 @@ export class TimelineComponent implements OnInit {
   public user: User;
   public comments: Array<any>;
   public userLoggedIn: User;
+  public url: string;
 
   constructor(
     private userService: UserService,
@@ -30,6 +31,7 @@ export class TimelineComponent implements OnInit {
     private router: Router,
     private sanitizer: DomSanitizer
   ) {
+    this.url = this.userService.url;
     this.token = userService.getToken();
     this.publications = [];
     this.comments = [];
@@ -47,13 +49,12 @@ export class TimelineComponent implements OnInit {
     await this.userService.getUserById(this.userService.userId).subscribe(
       response => {
         this.userLoggedIn = response.user;
-      },
-      error => {
-        console.error(error);
-      },
-      () => {
         this.loadProfile();
         this.loadPublications();
+      },
+      error => {
+        this.router.navigate(['/error']);
+        console.error(error);
       }
     );
   }
@@ -64,19 +65,14 @@ export class TimelineComponent implements OnInit {
       response => {
         publications = response.publications;
         this.total = response.total;
-      },
-      error => {
-        console.error(error);
-      },
-      () => {
         publications.map((publication, index) => {
-          this.getImageFile(publication);
+          this.getLikesPublications(publication);
           this.getCommentsPublication(publication);
         });
-        /* Ordenar por fecha de subida */
-        this.publications.sort( (a, b) => {
-          return a.createdAt.getTime() - b.createdAt.getTime();
-        });
+      },
+      error => {
+        this.publications = null;
+        console.error(error);
       }
     );
   }
@@ -84,7 +80,6 @@ export class TimelineComponent implements OnInit {
   loadProfile() {
     this.userService.getUser(this.userLoggedIn.username).subscribe(
       data => {
-        this.getAvatarUser(data.user);
         this.user = data.user;
       },
       error => {
@@ -93,52 +88,27 @@ export class TimelineComponent implements OnInit {
     );
   }
 
-  getImageFile(publication: Publication) {
-    this.publicationService.getImage(publication.user.username, publication.image).subscribe(
-      response => {
-        publication.image = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
-        this.userService.getImage(publication.user.username, publication.user.avatar).subscribe(
+  getLikesPublications(publication: Publication) {
+    this.likeService.getLikesByPublication(publication._id).subscribe(
+      res => {
+        publication.likes = res.total;
+      },
+      error => {
+        console.error(error);
+      },
+      () => {
+        this.likeService.getLikePublication(publication._id).subscribe(
           data => {
-            publication.user.avatar = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
-            this.likeService.getLikesByPublication(publication._id).subscribe(
-              res => {
-                publication.likes = res.total;
-                this.likeService.getLikePublication(publication._id).subscribe(
-                  dataResponse => {
-                    publication.isLiked = true;
-                  },
-                  error => {
-                    // console.log(error);
-                    publication.isLiked = false;
-                  }
-                );
-                this.publications.push(publication);
-              },
-              error => {
-                console.error(error);
-              }
-            );
+            publication.isLiked = true;
           },
           error => {
             console.error(error);
-          }
+            publication.isLiked = false;
+          },
         );
-      },
-      error => {
-        console.error(error);
       }
     );
-  }
-
-  getAvatarUser(user: User) {
-    this.userService.getImage(user.username, user.avatar).subscribe(
-      response => {
-        user.avatar = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    this.publications.push(publication);
   }
 
   saveLike(publication: Publication) {

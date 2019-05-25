@@ -1,0 +1,4 @@
+.link-primary {
+    color: var(--primary)!important;
+    font-weight: 600;
+}

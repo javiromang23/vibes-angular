@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
   public userLoggedIn: User;
   public usernameProfile: string;
   public counters: any;
+  public url: string;
 
   constructor(
     private userService: UserService,
@@ -32,6 +33,7 @@ export class ProfileComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private activatedRoute: ActivatedRoute
   ) {
+    this.url = this.userService.url;
     this.token = userService.getToken();
     this.activatedRoute.params.subscribe(params => {
       this.usernameProfile = params.username;
@@ -53,7 +55,8 @@ export class ProfileComponent implements OnInit {
         this.userLoggedIn = response.user;
       },
       error => {
-        console.log(error);
+        this.router.navigate(['/error']);
+        console.error(error);
       },
       () => {
         this.loadProfile();
@@ -65,23 +68,12 @@ export class ProfileComponent implements OnInit {
   loadProfile() {
     this.userService.getUser(this.usernameProfile).subscribe(
       data => {
-        this.getAvatarUser(data.user);
         this.user = data.user;
         this.getCounters();
       },
       error => {
-        console.log(error);
-      }
-    );
-  }
-
-  getAvatarUser(user: User) {
-    this.userService.getImage(user.username, user.avatar).subscribe(
-      response => {
-        user.avatar = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
-      },
-      error => {
-        console.log(error);
+        console.error(error);
+        this.router.navigate(['/error']);
       }
     );
   }
@@ -92,50 +84,39 @@ export class ProfileComponent implements OnInit {
       response => {
         publications = response.publications;
         this.counters.publications = response.total;
+        if (publications) {
+          publications.map((publication, index) => {
+            this.getCommentsLikesPublication(publication);
+          });
+        } else {
+          this.publications = null;
+        }
       },
       error => {
-        console.log(error);
-      },
-      () => {
-        publications.map((publication, index) => {
-          this.getImageFile(publication);
-        });
-        /* Ordenar por fecha de subida */
-        this.publications.sort( (a, b) => {
-          return a.createdAt.getTime() - b.createdAt.getTime();
-        });
-      }
-    );
-  }
-
-  getImageFile(publication: Publication) {
-    this.publicationService.getImage(publication.user.username, publication.image).subscribe(
-      data => {
-        publication.image = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
-        this.likeService.getLikesByPublication(publication._id).subscribe(
-          res => {
-            publication.likes = res.total;
-          },
-          error => {
-            console.log(error);
-          }
-        );
-        this.getCommentsPublication(publication);
-      },
-      error => {
-        console.log(error);
+        this.publications = null;
+        console.error(error);
       },
     );
   }
 
-  getCommentsPublication(publication: Publication) {
+  getCommentsLikesPublication(publication: Publication) {
     this.commentService.getCommentsPublication(publication._id).subscribe(
       response => {
         publication.comments = response.total;
-        this.publications.push(publication);
+        this.likeService.getLikesByPublication(publication._id).subscribe(
+          data => {
+            publication.likes = data.total;
+          },
+          error => {
+            console.error(error);
+          },
+          () => {
+            this.publications.push(publication);
+          }
+        );
       },
       error => {
-        console.log(error);
+        console.error(error);
       }
     );
   }
@@ -146,7 +127,7 @@ export class ProfileComponent implements OnInit {
         this.counters.followers = response.total;
       },
       error => {
-        console.log(error);
+        console.error(error);
       },
       () => {
         this.followService.getFolloweds(this.usernameProfile).subscribe(
@@ -154,7 +135,7 @@ export class ProfileComponent implements OnInit {
             this.counters.followeds = res.total;
           },
           err => {
-            console.log(err);
+            console.error(err);
           }
         );
       }

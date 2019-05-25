@@ -13,6 +13,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ErrorComponent } from './components/error/error.component';
+import { ArraySortPipe } from './pipes/array-sort.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     FooterComponent,
     NavbarComponent,
     TimelineComponent,
-    ProfileComponent
+    ProfileComponent,
+    ErrorComponent,
+    ArraySortPipe
   ],
   imports: [
     BrowserModule,

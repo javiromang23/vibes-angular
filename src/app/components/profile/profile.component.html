@@ -3,9 +3,9 @@
     <main class="container d-flex flex-column main-container" *ngIf="user">
         <header class="container-fluid d-flex flex-column pb-4">
             <div class="col-rs d-flex flex-row justify-content-between pt-4">
-                <div class="image-wrapper d-flex justify-content-center align-self-center">
+                <div class="image-wrapper d-flex justify-content-center align-self-center" *ngIf="user.avatar != ''">
                     <div class="image rounded-circle mr-0">
-                        <img [src]="user.avatar" alt="Foto de perfil" class="img-fluid" *ngIf="user.avatar">
+                        <img [src]="url + 'user/' + user.username + '/' + user.avatar" alt="Foto de perfil" class="img-fluid" *ngIf="user.avatar">
                     </div>
                 </div>
                 <div class="info d-flex flex-column align-self-center p-4">
@@ -72,10 +72,10 @@
                         </ng-template>
                         <div class="d-flex justify-content-center">
                             <div class="publications-wrapper d-flex flex-row flex-wrap" *ngIf="publications">
-                                <div class="publication bg-white m-2 d-flex align-items-center p-0" *ngFor="let publication of publications">
+                                <div class="publication bg-white m-2 d-flex align-items-center p-0" *ngFor="let publication of publications | sort:'publication.createdAt'">
                                     <a [routerLink]="['/']" class="link-publication">
                                         <div class="card border-0">
-                                            <img [src]="publication.image" class="img-fluid">
+                                            <img [src]="url + 'publication/' + publication.user.username + '/' + publication.image" class="img-fluid">
                                             <div class="card-img-overlay d-flex justify-content-center align-items-center invisible overlay">
                                                 <p class="card-text">
                                                     <span class="text-overlay">{{publication.likes}} <i class="fa fa-heart-o"></i></span>
@@ -84,6 +84,13 @@
                                             </div>
                                         </div>
                                     </a>
+                                </div>
+                            </div>
+                            <div class="publications-wrapper d-flex flex-row flex-wrap" *ngIf="!publications">
+                                <div style="font-size: 30px"><i class="fa fa-photo"></i></div>
+                                <div class="text-center">
+                                    <h3>No existen publicaciones :(</h3>
+                                    <h6>Comienza a compartir fotos</h6>
                                 </div>
                             </div>
                         </div>

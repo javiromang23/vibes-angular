@@ -15,7 +15,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-  ) { }
+  ) {
+    this.userLoggedIn = new User('', '', '', '', '', '', new Date(), '', '', '', '');
+  }
 
   ngOnInit() {
     this.getUserLoggedIn();
@@ -27,12 +29,14 @@ export class NavbarComponent implements OnInit {
         this.userLoggedIn = response.user;
       },
       error => {
+        this.router.navigate(['/error']);
         console.log(error);
       }
     );
   }
 
   logOut() {
+    console.clear();
     localStorage.clear();
     this.router.navigate(['/sign-in']);
   }
