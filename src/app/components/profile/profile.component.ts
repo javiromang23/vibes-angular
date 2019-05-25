@@ -4,7 +4,6 @@ import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
 import { Publication } from 'src/app/models/publication';
 import { User } from 'src/app/models/user';
-import { DomSanitizer } from '@angular/platform-browser';
 import { LikeService } from '../../services/like.service';
 import { CommentService } from '../../services/comment.service';
 import { FollowService } from '../../services/follow.service';
@@ -30,7 +29,6 @@ export class ProfileComponent implements OnInit {
     private followService: FollowService,
     private commentService: CommentService,
     private router: Router,
-    private sanitizer: DomSanitizer,
     private activatedRoute: ActivatedRoute
   ) {
     this.url = this.userService.url;

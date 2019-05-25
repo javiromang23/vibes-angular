@@ -6,6 +6,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PublicationComponent } from './components/publication/publication.component';
 import { ErrorComponent } from './components/error/error.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'timeline', component: TimelineComponent },
   { path: 'u/:username', component: ProfileComponent },
+  { path: 'p/:publication', component: PublicationComponent },
   { path: 'error', component: ErrorComponent },
   { path: '**', component: ErrorComponent }
 ];

@@ -15,6 +15,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ErrorComponent } from './components/error/error.component';
 import { ArraySortPipe } from './pipes/array-sort.pipe';
+import { PublicationComponent } from './components/publication/publication.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ArraySortPipe } from './pipes/array-sort.pipe';
     TimelineComponent,
     ProfileComponent,
     ErrorComponent,
-    ArraySortPipe
+    ArraySortPipe,
+    PublicationComponent
   ],
   imports: [
     BrowserModule,

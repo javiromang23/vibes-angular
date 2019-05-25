@@ -5,9 +5,7 @@ import { PublicationService } from '../../services/publication.service';
 import { CommentService } from '../../services/comment.service';
 import { LikeService } from '../../services/like.service';
 import { Publication } from 'src/app/models/publication';
-import { DomSanitizer } from '@angular/platform-browser';
 import { User } from '../../models/user';
-import { Comment } from '../../models/comment';
 
 @Component({
   selector: 'app-timeline',
@@ -28,8 +26,7 @@ export class TimelineComponent implements OnInit {
     private publicationService: PublicationService,
     private likeService: LikeService,
     private commentService: CommentService,
-    private router: Router,
-    private sanitizer: DomSanitizer
+    private router: Router
   ) {
     this.url = this.userService.url;
     this.token = userService.getToken();
