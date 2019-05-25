@@ -135,7 +135,10 @@ export class TimelineComponent implements OnInit {
   getCommentsPublication(publication: Publication) {
     this.commentService.getCommentsPublication(publication._id).subscribe(
       response => {
+        const index = this.publications.findIndex(x => x._id === publication._id);
         this.comments[publication._id] = response.comments;
+        publication.comments = response.total;
+        this.publications[index] = publication;
       },
       error => {
         console.error(error);

@@ -8,11 +8,12 @@ import { LikeService } from '../../services/like.service';
 import { CommentService } from '../../services/comment.service';
 import { FollowService } from '../../services/follow.service';
 import { Comment } from '../../models/comment';
+import { error } from 'util';
 
 @Component({
   selector: 'app-publication',
   templateUrl: './publication.component.html',
-  styleUrls: ['./publication.component.css']
+  styleUrls: ['../timeline/timeline.component.css']
 })
 export class PublicationComponent implements OnInit {
   public token: string;
@@ -36,6 +37,7 @@ export class PublicationComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.publicationActivated = params.publication;
     });
+    this.publication = null;
     this.comments = [];
   }
 
@@ -47,6 +49,44 @@ export class PublicationComponent implements OnInit {
     this.publicationService.getPublication(this.publicationActivated).subscribe(
       response => {
         this.publication = response.publication;
+        this.getLikesPublications();
+        this.getCommentsPublication();
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
+  getLikesPublications() {
+    this.likeService.getLikesByPublication(this.publication._id).subscribe(
+      res => {
+        this.publication.likes = res.total;
+      },
+      err => {
+        console.error(err);
+      },
+      () => {
+        this.likeService.getLikePublication(this.publication._id).subscribe(
+          data => {
+            this.publication.isLiked = true;
+          },
+          err => {
+            console.error(err);
+            this.publication.isLiked = false;
+          },
+        );
+      }
+    );
+  }
+
+  getCommentsPublication() {
+    this.commentService.getCommentsPublication(this.publication._id).subscribe(
+      response => {
+        this.comments = response.comments;
+      },
+      err => {
+        console.error(err);
       }
     );
   }
@@ -57,8 +97,8 @@ export class PublicationComponent implements OnInit {
         publication.likes++;
         publication.isLiked = true;
       },
-      error => {
-        console.error(error);
+      err => {
+        console.error(err);
       }
     );
   }
@@ -69,8 +109,8 @@ export class PublicationComponent implements OnInit {
         publication.likes--;
         publication.isLiked = false;
       },
-      error => {
-        console.error(error);
+      err => {
+        console.error(err);
       }
     );
   }
@@ -78,10 +118,10 @@ export class PublicationComponent implements OnInit {
   saveCommentPublication(publication: Publication, text: string) {
     this.commentService.saveCommentPublication(publication._id, text).subscribe(
       response => {
-        this.comments.push(response.comment);
+        this.comments.unshift(response.comment);
       },
-      error => {
-        console.error(error);
+      err => {
+        console.error(err);
       }
     );
   }

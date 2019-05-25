@@ -73,7 +73,7 @@
                         <div class="d-flex justify-content-center">
                             <div class="publications-wrapper d-flex flex-row flex-wrap" *ngIf="publications">
                                 <div class="publication bg-white m-2 d-flex align-items-center p-0" *ngFor="let publication of publications | sort:'publication.createdAt'">
-                                    <a [routerLink]="['/']" class="link-publication">
+                                    <a [routerLink]="['/p/' + publication._id]" class="link-publication">
                                         <div class="card border-0">
                                             <img [src]="url + 'publication/' + publication.user.username + '/' + publication.image" class="img-fluid">
                                             <div class="card-img-overlay d-flex justify-content-center align-items-center invisible overlay">

@@ -21,7 +21,7 @@ export class PublicationService {
 
   public getPublication(publicationId: string): Observable<any> {
     const headers = this.headers.set('Authorization', this.userService.token);
-    return this.http.get(this.url + 'publications/' + publicationId, {headers});
+    return this.http.get(this.url + 'publication/' + publicationId, {headers});
   }
 
   public getPublicationsUser(username: string): Observable<any> {

@@ -33,18 +33,18 @@
                 <button class="btn" (click)="deleteLike(publication)"><i class="fa fa-heart" style="color: red"></i></button>
               </ng-template>
 
-              <button class="btn"><i class="fa fa-comments-o"></i></button>
+              <a [routerLink]="['/p/' + publication._id]"><button class="btn"><i class="fa fa-comments-o"></i></button></a>
               <div *ngIf="publication.likes" class="pl-2">Le gusta a <b class="bold">{{publication.likes}} personas.</b></div>
             </div>
             <div class="panel-action pl-1 pb-3 d-flex justify-content-left align-items-center flex-wrap">
               <div class="col-md-12 d-flex flex-wrap">
                 <div class="col-md-12 pl-0">
-                  <b class="bold pl-0 pr-1">{{publication.user.username}}</b> {{publication.description}}
+                  <a [routerLink]="['/u/' + publication.user.username]"><b class="bold pl-0 pr-1">{{publication.user.username}}</b></a> {{publication.description}}
                 </div>
                 <div *ngFor="let comment of comments[publication._id] | slice:0:2; let i=index;" class="col-md-12 pl-0">
-                  <b class="bold pl-0 pr-1">{{comment.user.username}}</b> {{comment.text}}
+                  <a [routerLink]="['/u/' + comment.user.username]"><b class="bold pl-0 pr-1">{{comment.user.username}}</b></a> {{comment.text}}
                   <div class="col-md-12 pl-0 pt-2 see-more" *ngIf="i == 1">
-                      <b class="bold pl-0 pr-1"><a [routerLink]="">Ver más...</a></b>
+                      <b class="bold pl-0 pr-1"><a [routerLink]="['/p/' + publication._id]">Ver los {{publication.comments}} comentarios</a></b>
                   </div>
                 </div>
               </div>
