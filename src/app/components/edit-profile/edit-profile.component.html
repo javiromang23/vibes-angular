@@ -38,7 +38,6 @@
                 </div>
               </div>
               <div class="form-group d-none">
-                <label for="avatar" class="col-md-3">Nombre</label>
                 <input type="file" name="avatar" id="avatar" #avatar (change)="changeAvatar($event)" class="form-control-file col-md-6">
               </div>
               <div class="form-group">
@@ -94,7 +93,7 @@
               <div class="form-group pt-4">
                   <div class="offset-3">
                     <button type="submit" class="btn btn-primary btn-submit mr-5" [disabled]="!formPerfil.form.valid">Enviar</button>
-                    <button type="button" class="btn btn-danger btn-submit">Eliminar cuenta</button>
+                    <button type="button" class="btn btn-danger btn-submit" (click)="openModalDelete(modalDelete)">Eliminar cuenta</button>
                   </div>
               </div>
             </div>
@@ -141,16 +140,44 @@
     </div>
   </main>
   <app-footer></app-footer>
-  <div class="alert alert-dark fade show fixed-bottom mb-0" role="alert" *ngIf="status == true">
-    <strong>¡Perfecto!</strong> Tus datos han sido modificados correctamente.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="alert alert-danger fade show fixed-bottom mb-0" role="alert" *ngIf="status == false">
-    <strong>¡Error!</strong> Ha ocurrido un error en el proceso, comprueba que los datos introducidos son correctos.
+  <div class="alert alert-dark fade show fixed-bottom d-flex align-items-center mb-0" role="alert" *ngIf="status == true">
+    <p class="flex-fill"><strong>¡Perfecto!</strong> Tus datos han sido modificados correctamente.</p>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="status = null">
-      <span aria-hidden="true">&times;</span>
+      <span aria-hidden="true"><i class="fa fa-close"></i></span>
     </button>
   </div>
+  <div class="alert alert-danger fade show fixed-bottom d-flex align-items-center mb-0" role="alert" *ngIf="status == false">
+    <p class="flex-fill"><strong>¡Error!</strong> Ha ocurrido un error en el proceso, comprueba que los datos introducidos son correctos.</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="status = null">
+      <span aria-hidden="true"><i class="fa fa-close"></i></span>
+    </button>
+  </div>
+  <ng-template #modalDelete>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Eliminar cuenta</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true"><i class="fa fa-close"></i></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h5>¿Estás seguro de eliminar la cuenta?</h5>
+      <p>Tus datos serán eliminados y no podrás recuperarlos en un futuro.</p>
+      <div class="alert alert-dark fade show mb-0 text-left d-flex align-items-center" role="alert" *ngIf="statusDelete == true">
+        <p><strong>Eliminado con éxito.</strong> Te estamos redirigiendo...</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="statusDelete = null">
+          <span aria-hidden="true"><i class="fa fa-close"></i></span>
+        </button>
+      </div>
+      <div class="alert alert-danger fade show mb-0 text-left d-flex align-items-center" role="alert" *ngIf="statusDelete == false">
+        <p><strong>¡Error!</strong> Ha ocurrido un error en el proceso, contacta con el administrador.</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="statusDelete = null">
+          <span aria-hidden="true"><i class="fa fa-close"></i></span>
+        </button>
+      </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-submit" (click)="deleteAccount()">Aceptar</button>
+        <button type="button" class="btn btn-danger btn-submit" aria-label="Close" (click)="modalRef.hide()">Cancelar</button>
+    </div>
+  </ng-template>
 </div>

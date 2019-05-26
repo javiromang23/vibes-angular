@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from 'src/app/models/user';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-edit-profile',
@@ -14,11 +15,14 @@ export class EditProfileComponent implements OnInit {
   public usernameProfile: string;
   public url: string;
   public status: boolean;
+  public modalRef: BsModalRef;
+  public statusDelete: boolean;
 
   constructor(
     private userService: UserService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private modalService: BsModalService
   ) {
     this.url = this.userService.url;
     this.token = userService.getToken();
@@ -36,7 +40,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   getUserLoggedIn() {
-    this.userService.getUserById(this.userService.userId).subscribe(
+    this.userService.getUserById(this.userService.getUserId()).subscribe(
       response => {
         this.user = response.user;
       },
@@ -72,6 +76,26 @@ export class EditProfileComponent implements OnInit {
       err => {
         console.error(err);
         this.status = false;
+      }
+    );
+  }
+
+  openModalDelete(modalTemplate) {
+    this.modalRef = this.modalService.show(modalTemplate,
+      Object.assign({}, { class: 'modal-custom modal-custom-confirm' }));
+  }
+
+  deleteAccount() {
+    this.userService.deleteUser(this.usernameProfile).subscribe(
+      response => {
+        this.statusDelete = true;
+        localStorage.clear();
+        this.modalRef.hide();
+        this.router.navigate(['/sign-in']);
+      },
+      err => {
+        this.statusDelete = false;
+        console.error(err);
       }
     );
   }

@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getUserLoggedIn() {
-    this.userService.getUserById(this.userService.userId).subscribe(
+    this.userService.getUserById(this.userService.getUserId()).subscribe(
       response => {
         this.userLoggedIn = response.user;
       },

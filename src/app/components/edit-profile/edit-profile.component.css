@@ -103,26 +103,6 @@ label {
     text-align: center;
 }
 
-.alert {
-    border: none;
-    border-radius: 0;
-}
-
-.alert-dark {
-    background-color: #262626;
-    color: #fff;
-}
-
-.alert-danger {
-    background-color: var(--danger);
-    color: #fff;
-}
-
-.alert-dark button span,
-.alert-danger button span {
-    color: #fff;
-}
-
 @media (max-width: 768px) {
     .list {
         width: fit-content!important;

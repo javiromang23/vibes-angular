@@ -43,7 +43,7 @@ export class TimelineComponent implements OnInit {
   }
 
   async getUserLoggedIn() {
-    await this.userService.getUserById(this.userService.userId).subscribe(
+    await this.userService.getUserById(this.userService.getUserId()).subscribe(
       response => {
         this.userLoggedIn = response.user;
         this.loadProfile();

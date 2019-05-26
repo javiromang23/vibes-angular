@@ -23,7 +23,7 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
     if (this.token) {
-      this.router.navigate(['/signup']);
+      this.router.navigate(['/sign-up']);
     }
   }
 
@@ -31,8 +31,8 @@ export class SignUpComponent implements OnInit {
     this.userService.signUp(this.user).subscribe(
       response => {
         this.token = response.token;
-        localStorage.setItem('ssid_session', JSON.stringify(this.token));
-        localStorage.setItem('user_session', JSON.stringify(response.userId));
+        localStorage.setItem('token_session', JSON.stringify(this.token));
+        localStorage.setItem('ssid_session', JSON.stringify(response.userId));
         this.result = true;
       },
       error => {

@@ -29,3 +29,73 @@ a {
 a:hover {
     text-decoration: none!important;
 }
+
+.modal-custom {
+    height: 100%;
+    display: flex;
+}
+
+.modal-custom > .modal-content {
+    border-radius: 12px;
+    margin: auto;
+    border: none;
+}
+.modal-custom > .modal-content > .modal-header {
+    padding: 0.5rem 1rem;
+    align-items: center;
+}
+
+.modal-custom > .modal-content > .modal-header > .modal-title {
+    flex: 1 1 auto!important;
+    text-align: center;
+    font-size: 18px;
+    padding-left: 2em;
+}
+
+.modal-custom > .modal-content > .modal-header button:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.modal-custom > .modal-content > .modal-body {
+    text-align: center;
+}
+
+.modal-custom > .modal-content > .modal-footer {
+    justify-content: center;
+}
+
+.modal-custom-confirm {
+    max-width: 350px!important;
+}
+
+.alert {
+    border: none!important;
+    border-radius: 0!important;
+}
+
+.alert p {
+    padding: 0!important;
+    margin: 0!important;
+}
+
+.alert-dark {
+    background-color: #262626!important;
+    color: #fff!important;
+}
+
+.alert-danger {
+    background-color: var(--danger)!important;
+    color: #fff!important;
+}
+
+.close:focus {
+    box-shadow: none;
+    outline: none;
+    color: #fff;
+}
+
+.alert-dark button span,
+.alert-danger button span {
+    color: #fff;
+}

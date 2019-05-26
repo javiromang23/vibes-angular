@@ -9,24 +9,34 @@
             <form #RegisterForm="ngForm" (ngSubmit)='onSubmit(RegisterForm)'>
                 <div class="form-group">
                   <input type="email" name="email" class="form-control" placeholder="Correo electrónico" #email="ngModel" [(ngModel)]="user.email" required>
+                  <small class="form-text text-muted text-danger" *ngIf="!email.valid && email.touched">El email es obligatorio</small>
                 </div>
                 <div class="form-group">
                   <input type="text" name="name" class="form-control" placeholder="Nombre completo" #name="ngModel" [(ngModel)]="user.name" required>
+                  <small class="form-text text-muted text-danger" *ngIf="!name.valid && name.touched">El nombre es obligatorio</small>
                 </div>
                 <div class="form-group">
                   <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" #username="ngModel" [(ngModel)]="user.username" required>
+                  <small class="form-text text-muted text-danger" *ngIf="!username.valid && username.touched">El nombre de usuario es obligatorio</small>
                 </div>
                 <div class="form-group">
                   <input type="password" name="password" class="form-control" placeholder="Contraseña" #password="ngModel" [(ngModel)]="user.password" required>
+                  <small class="form-text text-muted text-danger" *ngIf="!password.valid && password.touched">La contraseña es obligatoria</small>
                 </div>
                 <div class="form-group">
                   <button class="btn btn-primary w-100" type="submit" [disabled]="!RegisterForm.form.valid">Siguiente</button>
                 </div>
-                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="result === true">
-                    <p><strong>Info:</strong> Te has registrado correctamente. <a [routerLink]="['/signin']">Entrar</a></p>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="alert alert-dark fade show fixed-bottom d-flex align-items-center mb-0" role="alert" *ngIf="result == true">
+                  <p class="flex-fill"><strong>¡Perfecto!</strong> Te has registrado correctamente. <a [routerLink]="['/sign-in']">Entrar a vibes</a></p>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="status = null">
+                    <span aria-hidden="true"><i class="fa fa-close"></i></span>
+                  </button>
+                </div>
+                <div class="alert alert-danger fade show fixed-bottom d-flex align-items-center mb-0" role="alert" *ngIf="result == false">
+                  <p class="flex-fill"><strong>¡Error!</strong> Ha ocurrido un error en el proceso, el usuario ya existe.</p>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="status = null">
+                    <span aria-hidden="true"><i class="fa fa-close"></i></span>
+                  </button>
                 </div>
             </form>
           </div>
