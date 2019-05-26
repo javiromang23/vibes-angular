@@ -48,9 +48,18 @@ export class UserService {
   }
 
   /** Método para modificar un usuario */
-  updateUser(user: User): Observable<any> {
-    const headers = this.headers.set('Authorization', this.getToken());
-    return this.http.put(this.url + 'user/' + user.username, user, {headers});
+  updateUser(user: User, data: FormData = null): Observable<any> {
+    let headers: HttpHeaders;
+    if (!data) {
+      headers = this.headers.set('Authorization', this.getToken());
+    } else {
+      headers = new HttpHeaders().set('Authorization', this.getToken());
+    }
+
+    if (!data) {
+      return this.http.put(this.url + 'user/' + user.username, user, {headers});
+    }
+    return this.http.put(this.url + 'user/' + user.username, data, {headers});
   }
 
   /** Método para eliminar un usuario */

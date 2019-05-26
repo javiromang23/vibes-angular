@@ -32,10 +32,14 @@
                             <h1>{{user.username}}</h1>
                         </div>
                         <div>
-                            <a href="" class="link-primary">Cambiar foto del perfil</a>
+                            <button type="button" class="btn link-primary" (click)="avatar.click()">Cambiar foto del perfil</button>
                         </div>
                     </div>
                 </div>
+              </div>
+              <div class="form-group d-none">
+                <label for="avatar" class="col-md-3">Nombre</label>
+                <input type="file" name="avatar" id="avatar" #avatar (change)="changeAvatar($event)" class="form-control-file col-md-6">
               </div>
               <div class="form-group">
                 <label for="name" class="col-md-3">Nombre</label>
@@ -90,7 +94,7 @@
               <div class="form-group pt-4">
                   <div class="offset-3">
                     <button type="submit" class="btn btn-primary btn-submit mr-5" [disabled]="!formPerfil.form.valid">Enviar</button>
-                    <button class="btn btn-danger btn-submit">Eliminar cuenta</button>
+                    <button type="button" class="btn btn-danger btn-submit">Eliminar cuenta</button>
                   </div>
               </div>
             </div>

@@ -55,6 +55,13 @@
 .link-primary {
     color: var(--primary)!important;
     font-weight: 600;
+    padding: 0px;
+    border-radius: 0;
+}
+
+.link-primary:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .form-group {

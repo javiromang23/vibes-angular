@@ -60,4 +60,20 @@ export class EditProfileComponent implements OnInit {
     );
   }
 
+  changeAvatar(event) {
+    const file: File = event.target.files[0];
+    const data = new FormData();
+    data.append('avatar', file);
+    this.userService.updateUser(this.user, data).subscribe(
+      response => {
+        this.user.avatar = response.user.avatar;
+        this.status = true;
+      },
+      err => {
+        console.error(err);
+        this.status = false;
+      }
+    );
+  }
+
 }
