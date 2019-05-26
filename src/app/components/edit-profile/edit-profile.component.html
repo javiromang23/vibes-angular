@@ -18,7 +18,7 @@
       </div>
       <div class="content content-perfil w-75">
         <div id="tab1" [hidden]="tab">
-          <form #formPerfil="ngForm" (click)="submitEditProfile(formPerfil)" class="w-100 p-4 form-inline">
+          <form #formPerfil="ngForm" (submit)="submitEditProfile(formPerfil)" class="w-100 p-4 form-inline">
             <div class="w-75 m-auto">
               <div class="col-rs d-flex flex-row justify-content-between pt-4 pb-1">
                 <div class="image-wrapper d-flex justify-content-end align-self-center" *ngIf="user.avatar != ''">
@@ -39,7 +39,7 @@
               </div>
               <div class="form-group">
                 <label for="name" class="col-md-3">Nombre</label>
-                <input type="text" name="name" id="name" #name="ngModel" [(ngModel)]="user.email" 
+                <input type="text" name="name" id="name" #name="ngModel" [(ngModel)]="user.name" 
                 class="form-control col-md-6" value="{{user.name}}">
               </div>
               <div class="form-group">
@@ -49,7 +49,7 @@
               </div>
               <div class="form-group">
                 <label for="website" class="col-md-3">Sitio web</label>
-                <input type="website" name="username" id="website" #website="ngModel" [(ngModel)]="user.website"
+                <input type="website" name="website" id="website" #website="ngModel" [(ngModel)]="user.website"
                 class="form-control col-md-6" value ="{{user.website}}">
               </div>
               <div class="form-group">
@@ -137,4 +137,16 @@
     </div>
   </main>
   <app-footer></app-footer>
+  <div class="alert alert-dark fade show fixed-bottom mb-0" role="alert" *ngIf="status == true">
+    <strong>¡Perfecto!</strong> Tus datos han sido modificados correctamente.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="alert alert-danger fade show fixed-bottom mb-0" role="alert" *ngIf="status == false">
+    <strong>¡Error!</strong> Ha ocurrido un error en el proceso, comprueba que los datos introducidos son correctos.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="status = null">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 </div>
