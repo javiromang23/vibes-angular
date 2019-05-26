@@ -54,7 +54,7 @@
 
 .form-control {
     border-left: none;
-    border-radius: 1em!important;
+    border-radius: 0em!important;
     border-bottom-left-radius: 0!important;
     border-top-left-radius: 0!important;
     margin-left: -10px;
@@ -65,8 +65,8 @@
 }
 
 .input-group-prepend > .input-group-text{
-    border-bottom-left-radius: 1em!important;
-    border-top-left-radius: 1em!important;
+    border-bottom-left-radius: 0em!important;
+    border-top-left-radius: 0em!important;
 }
 
 .form-control:focus {

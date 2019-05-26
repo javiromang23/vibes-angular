@@ -16,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ErrorComponent } from './components/error/error.component';
 import { ArraySortPipe } from './pipes/array-sort.pipe';
 import { PublicationComponent } from './components/publication/publication.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PublicationComponent } from './components/publication/publication.compo
     ProfileComponent,
     ErrorComponent,
     ArraySortPipe,
-    PublicationComponent
+    PublicationComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

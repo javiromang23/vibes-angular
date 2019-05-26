@@ -1,0 +1,140 @@
+<app-navbar></app-navbar>
+<div class="container container-main p-0 p-5">
+  <main class="container d-flex flex-column justify-content-center" *ngIf="user">
+    <div class="settings d-flex bg-white border">
+      <div class="list border-right w-25">
+        <ul class="list-group list-group-flush">
+            <a (click)="tab = false"
+            class="list-group-item list-group-item-action active">
+              <i class="fa fa-user"></i>
+              <span>Perfil</span>
+            </a>
+            <a (click)="tab = true"
+            class="list-group-item list-group-item-action">
+              <i class="fa fa-lock"></i>
+              <span>Cambiar contraseña</span>
+            </a>
+        </ul>
+      </div>
+      <div class="content content-perfil w-75">
+        <div id="tab1" [hidden]="tab">
+          <form #formPerfil="ngForm" (click)="submitEditProfile(formPerfil)" class="w-100 p-4 form-inline">
+            <div class="w-75 m-auto">
+              <div class="col-rs d-flex flex-row justify-content-between pt-4 pb-1">
+                <div class="image-wrapper d-flex justify-content-end align-self-center" *ngIf="user.avatar != ''">
+                    <div class="image rounded-circle mr-0">
+                        <img [src]="url + 'user/' + user.username + '/' + user.avatar" alt="Foto de perfil" class="img-fluid" *ngIf="user.avatar">
+                    </div>
+                </div>
+                <div class="info d-flex flex-column p-4">
+                    <div class="username d-flex align-content-start flex-wrap flex-column">
+                        <div class="title">
+                            <h1>{{user.username}}</h1>
+                        </div>
+                        <div>
+                            <a href="" class="link-primary">Cambiar foto del perfil</a>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-md-3">Nombre</label>
+                <input type="text" name="name" id="name" #name="ngModel" [(ngModel)]="user.email" 
+                class="form-control col-md-6" value="{{user.name}}">
+              </div>
+              <div class="form-group">
+                <label for="username" class="col-md-3">Nombre de usuario</label>
+                <input type="text" name="username" id="username" #username="ngModel" [(ngModel)]="user.username" 
+                class="form-control col-md-6" value="{{user.username}}">
+              </div>
+              <div class="form-group">
+                <label for="website" class="col-md-3">Sitio web</label>
+                <input type="website" name="username" id="website" #website="ngModel" [(ngModel)]="user.website"
+                class="form-control col-md-6" value ="{{user.website}}">
+              </div>
+              <div class="form-group">
+                <label for="bio" class="col-md-3">Biografia</label>
+                <textarea name="bio" id="bio" #bio="ngModel" [(ngModel)]="user.bio"
+                class="form-control col-md-6">{{user.bio}}</textarea>
+              </div>
+              <div class="offset-3">
+                <h5>Información privada</h5>
+              </div>
+              <div class="form-group">
+                <label for="email" class="col-md-3">Correo electrónico</label>
+                <input type="email" name="email" id="email" #email="ngModel" [(ngModel)]="user.email" 
+                class="form-control col-md-6" value="{{user.email}}">
+              </div>
+              <div class="form-group">
+                <label for="sex" class="col-md-3">Sexo</label>
+                <select name="sex" id="sex" #sex="ngModel" [(ngModel)]="user.sex" class="form-control col-md-6">
+                  <option value="male" [selected]="user.sex == 'male' ? true : false">Hombre</option>
+                  <option value="female" [selected]="user.sex == 'female' ? true : false">Mujer</option>
+                  <option value="unspecified" [selected]="user.sex == 'unspecified' ? true : false">
+                    Sin especificar</option>
+                </select>
+              </div>
+              <div class="offset-3">
+                <h5>Privacidad de la cuenta</h5>
+              </div>
+              <div class="form-group">
+                <label for="typeAccount" class="col-md-3">Tipo de cuenta</label>
+                <select name="typeAccount" id="typeAccount" #typeAccount="ngModel" [(ngModel)]="user.typeAccount"
+                class="form-control col-md-6">
+                  <option value="public" [selected]="user.typeAccount == 'public' ? true : false">
+                    Pública</option>
+                  <option value="private" [selected]="user.typeAccount == 'private' ? true : false">
+                    Privada</option>
+                </select>
+              </div>
+              <div class="form-group pt-4">
+                  <div class="offset-3">
+                    <button type="submit" class="btn btn-primary btn-submit mr-5" [disabled]="!formPerfil.form.valid">Enviar</button>
+                    <button class="btn btn-danger btn-submit">Eliminar cuenta</button>
+                  </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div id="tab2" [hidden]="!tab">
+          <form ngForm="changePassword" class="w-100 p-4 form-inline">
+            <div class="w-75 m-auto">
+              <div class="col-rs d-flex flex-row justify-content-between pt-4 pb-1">
+                <div class="image-wrapper d-flex justify-content-end align-self-center" *ngIf="user.avatar != ''">
+                    <div class="image rounded-circle mr-0">
+                        <img [src]="url + 'user/' + user.username + '/' + user.avatar" alt="Foto de perfil" class="img-fluid" *ngIf="user.avatar">
+                    </div>
+                </div>
+                <div class="info d-flex flex-column p-4">
+                    <div class="username d-flex align-content-start flex-wrap flex-column">
+                        <div class="title">
+                            <h1>{{user.username}}</h1>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="passwordOld" class="col-md-3">Contraseña actual</label>
+                <input type="password" name="passwordOld" id="passwordOld" #passwordOld class="form-control col-md-6">
+              </div>
+              <div class="form-group">
+                <label for="passwordNew" class="col-md-3">Contraseña nueva</label>
+                <input type="password" name="passwordNew" id="passwordNew" #passwordNew class="form-control col-md-6">
+              </div>
+              <div class="form-group">
+                <label for="passwordRepeat" class="col-md-3">Confirmar contraseña</label>
+                <input type="password" name="passwordRepeat" id="passwordRepeat" #passwordRepeat class="form-control col-md-6">
+              </div>
+              <div class="form-group pt-4">
+                <div class="offset-3">
+                  <button type="submit" class="btn btn-primary btn-submit mr-5">Enviar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+  <app-footer></app-footer>
+</div>

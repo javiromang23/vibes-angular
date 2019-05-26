@@ -9,7 +9,7 @@
 
 html,
 body {
-    background: #FAFAFA;
+    background-color: var(--background-color)!important;
     font-size: 14px;
     line-height: 18px;
 }
@@ -28,9 +28,4 @@ a {
 
 a:hover {
     text-decoration: none!important;
-}
-
-/* main */
-.main {
-    background-color: var(--background-color);
 }

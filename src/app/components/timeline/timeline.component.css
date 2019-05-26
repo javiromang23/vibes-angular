@@ -170,9 +170,6 @@
     .comment {
         width: 70%;
     }
-    .main {
-        margin: 3em 0;
-    }
     .image-profile {
         width: 40px;
         height: 40px;
@@ -185,6 +182,7 @@
         padding: 0!important;
         height: fit-content!important;
         margin-top: 60px;
+        margin-bottom: 50px;
     }
     .image-left {
         width: 100%;
@@ -193,5 +191,8 @@
 
     .footer-right {
         display: none;
+    }
+    .main {
+        margin: 3em 0;
     }
 }
