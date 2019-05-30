@@ -30,6 +30,7 @@ export class ResetPasswordComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.hash = params.hash;
     });
+    this.checkHash();
   }
 
   onSubmit(form) {
@@ -46,6 +47,16 @@ export class ResetPasswordComponent implements OnInit {
     } else {
       this.result = false;
     }
+  }
+
+  checkHash() {
+    this.userService.checkResetPassword(this.hash).subscribe(
+      res => {
+      },
+      error => {
+        this.router.navigate(['/error']);
+      }
+    );
   }
 
 }

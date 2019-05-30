@@ -112,4 +112,10 @@ export class UserService {
     const headers = this.headers;
     return this.http.post(this.url + 'resetPasswordByEmail/' + hash , { password }, { headers });
   }
+
+
+  checkResetPassword(hash: string): Observable<any> {
+    const headers = this.headers;
+    return this.http.get(this.url + 'check-reset/' + hash, { headers });
+  }
 }
