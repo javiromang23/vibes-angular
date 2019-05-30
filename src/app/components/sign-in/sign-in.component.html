@@ -17,7 +17,7 @@
                   <div class="form-group">
                       <button class="btn btn-primary w-100" type="submit" [disabled]="!loginForm.form.valid">Iniciar sesión</button>
                   </div>
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="result == false">
+                  <div class="alert alert-dark alert-dismissible fade show" role="alert" *ngIf="result == false">
                       <strong>Info:</strong> Error de autenticación, comprueba tu email y/o contraseña.
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
@@ -36,7 +36,7 @@
                   <a href="#"><i class="fab fa-google"></i> Iniciar sesión con Google</a>
               </div> -->
               <div class="link-login">
-                  <a href="#">¿Olvidaste la contraseña?</a>
+                  <a [routerLink]="['/reset-password']">¿Olvidaste la contraseña?</a>
               </div>
           </div>
       </div>

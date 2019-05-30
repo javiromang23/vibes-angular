@@ -18,6 +18,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { ArraySortPipe } from './pipes/array-sort.pipe';
 import { PublicationComponent } from './components/publication/publication.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     ErrorComponent,
     ArraySortPipe,
     PublicationComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ResetPasswordComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,

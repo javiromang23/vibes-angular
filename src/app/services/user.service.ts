@@ -95,4 +95,21 @@ export class UserService {
     }
     return userId;
   }
+
+  /**
+   * Método para enviar correo para reestablecer contraseña
+   */
+  sendEmailResetPassword(email: string): Observable<any> {
+    const headers = this.headers;
+    return this.http.post(this.url + 'resetPassword', { email}, {headers});
+  }
+
+  /**
+   * Método para restablecer contraseña con un hash enviado por email
+   * @param password contraseña
+   */
+  resetPasswordByEmail(password: string, hash: string): Observable<any> {
+    const headers = this.headers;
+    return this.http.post(this.url + 'resetPasswordByEmail/' + hash , { password }, { headers });
+  }
 }

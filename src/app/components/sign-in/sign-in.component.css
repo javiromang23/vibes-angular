@@ -92,6 +92,10 @@ a {
     font-weight: 600;
 }
 
+.label-form {
+    font-weight: 600;
+}
+
 /* Media queries */
 @media (max-width: 568px) {
     .card {
