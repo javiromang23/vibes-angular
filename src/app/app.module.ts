@@ -20,6 +20,7 @@ import { PublicationComponent } from './components/publication/publication.compo
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { UploadPublicationComponent } from './components/upload-publication/upload-publication.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
     PublicationComponent,
     EditProfileComponent,
     ResetPasswordComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    UploadPublicationComponent
   ],
   imports: [
     BrowserModule,

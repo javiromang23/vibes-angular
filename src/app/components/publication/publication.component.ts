@@ -3,12 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
 import { Publication } from 'src/app/models/publication';
-import { User } from 'src/app/models/user';
 import { LikeService } from '../../services/like.service';
 import { CommentService } from '../../services/comment.service';
-import { FollowService } from '../../services/follow.service';
 import { Comment } from '../../models/comment';
-import { error } from 'util';
 
 @Component({
   selector: 'app-publication',
@@ -18,7 +15,6 @@ import { error } from 'util';
 export class PublicationComponent implements OnInit {
   public token: string;
   public publication: Publication;
-  public userLoggedIn: User;
   public publicationActivated: string;
   public url: string;
   public comments: Array<Comment>;
@@ -27,7 +23,6 @@ export class PublicationComponent implements OnInit {
     private userService: UserService,
     private publicationService: PublicationService,
     private likeService: LikeService,
-    private followService: FollowService,
     private commentService: CommentService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -42,6 +37,9 @@ export class PublicationComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.token) {
+      this.router.navigate(['/sign-in']);
+    }
     this.getPublicationActivated();
   }
 

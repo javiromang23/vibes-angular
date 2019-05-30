@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit {
         this.userLoggedIn = response.user;
       },
       error => {
+        this.userLoggedIn = null;
         this.router.navigate(['/error']);
         console.log(error);
       }

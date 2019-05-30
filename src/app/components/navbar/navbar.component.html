@@ -15,7 +15,7 @@
         <i class="fas fa-bars"></i>
     </button>
     <div class="collapse navbar-collapse p-2" id="menu" [collapse]="!isCollapsed">
-      <ul class="navbar-nav mr-auto" *ngIf="userLoggedIn._id">
+      <ul class="navbar-nav mr-auto" *ngIf="userLoggedIn">
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/timeline']"><i class="fa fa-home"></i></a>
         </li>
@@ -32,7 +32,7 @@
           <a class="nav-link" (click)="logOut()"><i class="fa fa-sign-out"></i></a>
         </li>
       </ul>
-      <ul class="navbar-nav mr-auto" *ngIf="!userLoggedIn._id">
+      <ul class="navbar-nav mr-auto" *ngIf="!userLoggedIn">
         <li class="nav-item">
           <a class="nav-link" style="font-size: 16px" [routerLink]="['/sign-in']">Entrar</a>
         </li>
@@ -49,7 +49,7 @@
     <a class="nav-link" [routerLink]="['/explore']"><i class="fa fa-compass"></i></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/explore']"><i class="fa fa-plus-square"></i></a>
+    <a class="nav-link" [routerLink]="[ '/upload-publication' ]"><i class="fa fa-plus-square"></i></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" [routerLink]="['/', userLoggedIn.username]"><i class="fa fa-heart-o"></i></a>

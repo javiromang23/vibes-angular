@@ -138,6 +138,61 @@
     overflow: auto;
 }
 
+.btn-custom {
+    border-radius: 0!important;
+    color: #fff!important;
+    font-weight: 600;
+}
+
+.btn-custom:hover {
+    background-color: var(--main-color)!important;
+    transition: .2s ease-in-out;
+    border-color: var(--main-color)!important;
+}
+
+.card-footer-custom {
+    background-color: var(--background-color);
+}
+
+.image-upload {
+    background-color: whitesmoke;
+}
+
+.logo-image {
+    font-size: 56px;
+    color: grey
+}
+
+.upload-file button {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.upload-file i {
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.upload-file:hover, .upload-file:hover > .btn {
+    color: var(--main-color);
+    transition: .2s ease-in-out;
+}
+
+.upload-file {
+    transition: .2s ease-in-out;
+}
+
+#category {
+    border: none;
+    border-radius: none;
+    box-shadow: 0px 0px 3px 0px rgba(212,212,212,1);
+    font-weight: 600;
+}
+
+#category option {
+    font-weight: 600;
+}
+
 /*** Media queries ***/
 
 @media (max-width: 1024px) {

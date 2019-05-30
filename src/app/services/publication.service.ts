@@ -39,4 +39,9 @@ export class PublicationService {
     return this.http.get(this.url + 'publication/' + username + '/' + image,
     { headers , responseType: 'blob' });
   }
+
+  public uploadPublication(formData): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', this.userService.token);
+    return this.http.post(this.url + 'publication', formData, { headers });
+  }
 }

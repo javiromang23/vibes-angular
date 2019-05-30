@@ -10,6 +10,7 @@ import { PublicationComponent } from './components/publication/publication.compo
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { UploadPublicationComponent } from './components/upload-publication/upload-publication.component';
 import { ErrorComponent } from './components/error/error.component';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'edit/:username', component: EditProfileComponent },
   { path: 'reset-password', component: ForgetPasswordComponent},
   { path: 'reset-password/:hash', component: ResetPasswordComponent},
+  { path: 'upload-publication', component: UploadPublicationComponent},
   { path: 'error', component: ErrorComponent },
   { path: '**', component: ErrorComponent }
 ];
