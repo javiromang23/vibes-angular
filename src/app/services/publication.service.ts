@@ -44,4 +44,9 @@ export class PublicationService {
     const headers = new HttpHeaders().set('Authorization', this.userService.token);
     return this.http.post(this.url + 'publication', formData, { headers });
   }
+
+  public deletePublication(publicationId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', this.userService.token);
+    return this.http.delete(this.url + 'publication/' + publicationId, { headers });
+  }
 }

@@ -8,14 +8,14 @@
               <a [routerLink]="['/u/' + publication.user.username]"><img [src]="url + 'user/' + publication.user.username + '/' + publication.user.avatar" alt="perfil" /></a>
             </div>
           </div>
-          <div class="d-flex justify-content-center align-items-center">
+          <div class="d-flex justify-content-center align-items-center" *ngIf="publication">
             <a [routerLink]="['/u/' + publication.user.username]">{{publication.user.username}}</a>
           </div>
           <div class="small bold d-flex justify-content-end align-items-center flex-fill text-right date-publication">
             {{publication.createdAt | date:'HH:mm dd/MM/yy '}}
           </div>
           <div class="small bold d-flex justify-content-end align-items-center pl-4 text-right" *ngIf="user._id == publication.user._id">
-            <button class="btn btn-delete"><i class="fa fa-trash-o"></i></button>
+            <button class="btn btn-delete" (click)="openModalDelete(modalDelete)"><i class="fa fa-trash-o"></i></button>
           </div>
         </div>
         <div class="card-body p-0 d-flex flex-wrap">
@@ -37,7 +37,7 @@
               <div class="panel-action pl-3 pb-0 pr-3 d-flex justify-content-left align-items-center">
                 <!-- Like -->
                 <div *ngIf="!publication.isLiked; else notLiked">
-                  <button id="btnLike" #btnLike class="btn" (click)="saveLike(publication)"><i class="fa fa-heart-o"></i></button>
+                  <button class="btn" (click)="saveLike(publication)"><i class="fa fa-heart-o"></i></button>
                 </div>
                 <!-- Not liked -->
                 <ng-template #notLiked>
@@ -87,3 +87,34 @@
       </div>
   </main>
 </div>
+<ng-template #modalDelete>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Eliminar publicación</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true"><i class="fa fa-close"></i></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>¿Estás seguro de eliminar la publicación?</h5>
+    <p>Tu publicación será borrada y no podrás recuperarla.</p>
+    <div class="alert alert-dark fade show mb-0 text-left d-flex align-items-center" role="alert"
+      *ngIf="statusDelete == true">
+      <p><strong>Eliminado con éxito.</strong> Te estamos redirigiendo...</p>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="statusDelete = null">
+        <span aria-hidden="true"><i class="fa fa-close"></i></span>
+      </button>
+    </div>
+    <div class="alert alert-danger fade show mb-0 text-left d-flex align-items-center" role="alert"
+      *ngIf="statusDelete == false">
+      <p><strong>¡Error!</strong> Ha ocurrido un error en el proceso, intentalo de nuevo más tarde.</p>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="statusDelete = null">
+        <span aria-hidden="true"><i class="fa fa-close"></i></span>
+      </button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-submit" (click)="deletePublication()">Aceptar</button>
+    <button type="button" class="btn btn-danger btn-submit ml-2" aria-label="Close"
+      (click)="modalRef.hide()">Cancelar</button>
+  </div>
+</ng-template>

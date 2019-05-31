@@ -78,40 +78,39 @@ export class ProfileComponent implements OnInit {
 
   loadPublications() {
     let publications;
-    this.publicationService.getPublicationsUser(this.usernameProfile).subscribe(
+    this.publicationService.getPublicationsFollows().subscribe(
       response => {
         publications = response.publications;
         this.counters.publications = response.total;
-        if (publications) {
-          publications.map((publication, index) => {
-            this.getCommentsLikesPublication(publication);
-          });
-        } else {
-          this.publications = null;
-        }
+        publications.map((publication, index) => {
+          this.getLikesPublications(publication);
+          this.getCommentsPublication(publication);
+        });
       },
       error => {
         this.publications = null;
         console.error(error);
-      },
+      }
     );
   }
 
-  getCommentsLikesPublication(publication: Publication) {
+  getLikesPublications(publication: Publication) {
+    this.likeService.getLikesByPublication(publication._id).subscribe(
+      res => {
+        publication.likes = res.total;
+      },
+      error => {
+        console.error(error);
+      },
+    );
+    this.publications.push(publication);
+  }
+
+  getCommentsPublication(publication: Publication) {
     this.commentService.getCommentsPublication(publication._id).subscribe(
       response => {
-        publication.comments = response.total;
-        this.likeService.getLikesByPublication(publication._id).subscribe(
-          data => {
-            publication.likes = data.total;
-          },
-          error => {
-            console.error(error);
-          },
-          () => {
-            this.publications.push(publication);
-          }
-        );
+        const index = this.publications.findIndex(x => x._id === publication._id);
+        this.publications[index].comments = response.total;
       },
       error => {
         console.error(error);

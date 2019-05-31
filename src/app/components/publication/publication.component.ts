@@ -21,6 +21,8 @@ export class PublicationComponent implements OnInit {
   public url: string;
   public comments: Array<Comment>;
   public user: User;
+  public modalRef: BsModalRef;
+  public statusDelete: boolean;
 
   constructor(
     private userService: UserService,
@@ -165,6 +167,25 @@ export class PublicationComponent implements OnInit {
             console.error(err);
           }
         );
+      }
+    );
+  }
+
+  openModalDelete(modalTemplate) {
+    this.modalRef = this.modalService.show(modalTemplate,
+      Object.assign({}, { class: 'modal-custom modal-custom-confirm' }));
+  }
+
+  deletePublication() {
+    this.publicationService.deletePublication(this.publication._id).subscribe(
+      reponse => {
+        this.statusDelete = true;
+        this.modalRef.hide();
+        this.router.navigate(['/timeline']);
+      },
+      err => {
+        this.statusDelete = false;
+        console.error(err);
       }
     );
   }
