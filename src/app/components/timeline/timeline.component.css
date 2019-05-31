@@ -250,4 +250,7 @@
     .main {
         margin: 3em 0;
     }
+    .image-upload-p {
+        min-height: 250px;
+    }
 }

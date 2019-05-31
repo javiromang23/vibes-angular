@@ -104,6 +104,10 @@
     padding: 0!important;
 }
 
+.btn-out {
+    font-size: 22px;
+}
+
 /* Media queries */
 
 @media (max-width: 568px) {
@@ -140,9 +144,6 @@
 @media (max-width: 768px) {
     .navbar-toggler {
         display: none;
-    }
-    .btn-out {
-        font-size: 22px;
     }
     .main-nav {
         width: 100%!important;
