@@ -5,7 +5,7 @@
         <div class="card w-100 overflow-hidden publication flex-column m-3" *ngFor="let publication of publications | sort:'publication.createdAt'">
           <div class="card-header bg-white d-flex flex-fill border-bottom-0">
             <div class="image-wrapper">
-              <div class="image-profile rounded-circle">
+              <div class="image-profile rounded-circle" *ngIf="publication.user">
                 <a [routerLink]="['/u/' + publication.user.username]"><img [src]="url + 'user/' + publication.user.username + '/' + publication.user.avatar" alt="perfil" /></a>
               </div>
             </div>
@@ -18,7 +18,7 @@
           </div>
           <div class="card-body p-0">
             <div class="image" *ngIf="publication.image">
-              <img [src]="url + 'publication/' + publication.user.username + '/' + publication.image" alt="{{publication.title}}">
+              <img [src]="url + 'publication/' + publication.user.username + '/' + publication.image" alt="{{publication.title}}" (dblclick)="dblclick(publication._id)">
             </div>
           </div>
           <div class="card-footer bg-white border-top-0 p-0">

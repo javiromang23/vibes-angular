@@ -30,12 +30,12 @@ export class EditProfileComponent implements OnInit {
       this.usernameProfile = params.username;
     });
     this.status = null;
-  }
-
-  ngOnInit() {
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }
+  }
+
+  ngOnInit() {
     this.getUserLoggedIn();
   }
 

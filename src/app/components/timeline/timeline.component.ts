@@ -33,12 +33,12 @@ export class TimelineComponent implements OnInit {
     this.publications = [];
     this.comments = [];
     this.user = new User('', '', '', '', '', '', new Date(), '', '', '', '');
-  }
-
-  ngOnInit() {
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }
+  }
+
+  ngOnInit() {
     this.getUserLoggedIn();
   }
 
@@ -50,7 +50,7 @@ export class TimelineComponent implements OnInit {
         this.loadPublications();
       },
       error => {
-        this.router.navigate(['/error']);
+        this.router.navigate(['/sign-in']);
         console.error(error);
       }
     );
@@ -153,6 +153,35 @@ export class TimelineComponent implements OnInit {
       },
       error => {
         console.error(error);
+      }
+    );
+  }
+
+  dblclick(id) {
+    const index = this.publications.findIndex(x => x._id === id);
+
+    this.likeService.getLikePublication(id).subscribe(
+      response => {
+        this.likeService.deleteLikePublication(id).subscribe(
+          data => {
+            this.publications[index].likes--;
+            this.publications[index].isLiked = false;
+          },
+          err => {
+            console.error(err);
+          }
+        );
+      },
+      error => {
+        this.likeService.saveLikePublication(id).subscribe(
+          data => {
+            this.publications[index].likes++;
+            this.publications[index].isLiked = true;
+          },
+          err => {
+            console.error(err);
+          }
+        );
       }
     );
   }

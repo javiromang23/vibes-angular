@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ContentChild, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
@@ -6,6 +6,8 @@ import { Publication } from 'src/app/models/publication';
 import { LikeService } from '../../services/like.service';
 import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../models/comment';
+import { User } from '../../models/user';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-publication',
@@ -18,6 +20,7 @@ export class PublicationComponent implements OnInit {
   public publicationActivated: string;
   public url: string;
   public comments: Array<Comment>;
+  public user: User;
 
   constructor(
     private userService: UserService,
@@ -25,7 +28,8 @@ export class PublicationComponent implements OnInit {
     private likeService: LikeService,
     private commentService: CommentService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private modalService: BsModalService,
   ) {
     this.url = this.userService.url;
     this.token = userService.getToken();
@@ -34,13 +38,27 @@ export class PublicationComponent implements OnInit {
     });
     this.publication = null;
     this.comments = [];
-  }
-
-  ngOnInit() {
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }
+  }
+
+  ngOnInit() {
     this.getPublicationActivated();
+    this.getUserLoggedIn();
+  }
+
+  getUserLoggedIn() {
+    this.userService.getUserById(this.userService.getUserId()).subscribe(
+      response => {
+        this.user = response.user;
+      },
+      error => {
+        this.user = null;
+        this.router.navigate(['/sign-in']);
+        console.log(error);
+      }
+    );
   }
 
   getPublicationActivated() {
@@ -120,6 +138,33 @@ export class PublicationComponent implements OnInit {
       },
       err => {
         console.error(err);
+      }
+    );
+  }
+
+  dblclick(id) {
+    this.likeService.getLikePublication(id).subscribe(
+      response => {
+        this.likeService.deleteLikePublication(id).subscribe(
+          data => {
+            this.publication.likes--;
+            this.publication.isLiked = false;
+          },
+          err => {
+            console.error(err);
+          }
+        );
+      },
+      error => {
+        this.likeService.saveLikePublication(id).subscribe(
+          data => {
+            this.publication.likes++;
+            this.publication.isLiked = true;
+          },
+          err => {
+            console.error(err);
+          }
+        );
       }
     );
   }

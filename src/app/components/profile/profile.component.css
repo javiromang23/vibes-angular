@@ -220,6 +220,9 @@
     .info {
         width: 75%;
     }
+    .info-optional {
+        padding-top: .5rem!important;
+    }
     .info-optional > div p, .info-optional .web a{
         font-size: 14px;
     }
@@ -271,5 +274,9 @@
     }
     .text-overlay {
         font-size: 18px;
+    }
+    .image {
+        width: 100px;
+        height: 100px;
     }
 }

@@ -14,10 +14,13 @@
           <div class="small bold d-flex justify-content-end align-items-center flex-fill text-right date-publication">
             {{publication.createdAt | date:'HH:mm dd/MM/yy '}}
           </div>
+          <div class="small bold d-flex justify-content-end align-items-center pl-4 text-right" *ngIf="user._id == publication.user._id">
+            <button class="btn btn-delete"><i class="fa fa-trash-o"></i></button>
+          </div>
         </div>
         <div class="card-body p-0 d-flex flex-wrap">
           <div class="image image-left border-top" *ngIf="publication.image">
-            <img [src]="url + 'publication/' + publication.user.username + '/' + publication.image" alt="{{publication.title}}">
+            <img [src]="url + 'publication/' + publication.user.username + '/' + publication.image" alt="{{publication.title}}" (dblclick)="dblclick(publication._id)">
           </div>
           <div class="card-footer footer-right bg-white p-0 position-relative border-left">
             <div class="panel-action comments-box p-1 pb-3 pt-3 d-flex">
@@ -34,7 +37,7 @@
               <div class="panel-action pl-3 pb-0 pr-3 d-flex justify-content-left align-items-center">
                 <!-- Like -->
                 <div *ngIf="!publication.isLiked; else notLiked">
-                  <button class="btn" (click)="saveLike(publication)"><i class="fa fa-heart-o"></i></button>
+                  <button id="btnLike" #btnLike class="btn" (click)="saveLike(publication)"><i class="fa fa-heart-o"></i></button>
                 </div>
                 <!-- Not liked -->
                 <ng-template #notLiked>

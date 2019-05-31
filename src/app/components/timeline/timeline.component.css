@@ -193,6 +193,16 @@
     font-weight: 600;
 }
 
+.btn-delete {
+    padding: 0px 5px;
+    font-size: 26px;
+    border-radius: 50%;
+}
+
+.btn-delete:hover {
+    color: var(--danger);
+}
+
 /*** Media queries ***/
 
 @media (max-width: 1024px) {

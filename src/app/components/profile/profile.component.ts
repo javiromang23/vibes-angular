@@ -38,12 +38,12 @@ export class ProfileComponent implements OnInit {
   });
     this.counters = {};
     this.publications = [];
-  }
-
-  ngOnInit() {
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }
+  }
+
+  ngOnInit() {
     this.getUserLoggedIn();
   }
 

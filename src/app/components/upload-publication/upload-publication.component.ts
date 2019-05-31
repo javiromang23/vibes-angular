@@ -37,12 +37,12 @@ export class UploadPublicationComponent implements OnInit {
         'Travelvibes',
         'Musicvibes'
     ];
-  }
-
-  ngOnInit() {
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }
+  }
+
+  ngOnInit() {
     this.getUserLoggedIn();
   }
 
