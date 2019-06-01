@@ -32,7 +32,7 @@ export class TimelineComponent implements OnInit {
     this.token = userService.getToken();
     this.publications = [];
     this.comments = [];
-    this.user = new User('', '', '', '', '', '', new Date(), '', '', '', '');
+    this.user = new User('', '', '', '', '', '', new Date(), '', '', '', '', null);
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }

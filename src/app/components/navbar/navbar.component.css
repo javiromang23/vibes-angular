@@ -82,7 +82,11 @@
 
 .form-control:not(:focus),
 .form-control:not(:focus) + .input-group-prepend > .input-group-text{
-    transition: .2s ease-in-out;
+    transition: .5s ease-in-out;
+}
+
+.form-control:not(:focus) + .input-group-prepend > .input-group-text {
+    transition: .6s ease-in-out!important;
 }
 
 .form-control[type="search"]::-webkit-search-cancel-button {
@@ -108,6 +112,102 @@
     font-size: 22px;
 }
 
+.input-group-prepend i {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.results {
+    width: 300px;
+    position: absolute;
+    top: 45px;
+    left: -50px;
+    padding: 1rem;
+    z-index: 9999999999;
+    transition: .2s ease-in-out;
+}
+
+.hr {
+    position: absolute;
+    top: -8px;
+    left: calc(50% - 15px);
+    width: 15px;
+    height: 15px;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -webkit-transform: rotate(45deg); /* Safari 3-8 */
+    transform: rotate(45deg);
+    background-color: #fff;
+    z-index: 0;
+}
+
+.search-box {
+    max-width: 200px;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+.image-wrapper {
+    width: 30%;
+}
+
+.image {
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+    position: relative;
+    background-color: #fff;
+}
+
+.image img{
+    max-width: 100%;
+    height: 100%;
+    object-fit: fill;
+    position: absolute;
+}
+
+.username {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+
+.info p {
+    padding: 0;
+    margin: 0;
+}
+
+.btn-dark {
+    padding: .25em 1em;
+    font-weight: 600;
+}
+
+.btn-dark:hover {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.notResults {
+    color: #a5a5a5;
+    font-weight: 400;
+    transition: .2s ease-in-out;
+}
+
+.item {
+    padding: .75rem!important;
+    transition: .2s ease-in-out;
+}
+
 /* Media queries */
 
 @media (max-width: 568px) {
@@ -126,6 +226,15 @@
         top: 0;
         z-index: 99999999;
         width: 100vw;
+    }
+    .results {
+        width: 100vw;
+        position: fixed;
+        left: 0;
+        border-left: 0px!important;
+        border-right: 0px!important;
+        border-radius: 0px;
+        top: 54px;
     }
 }
 

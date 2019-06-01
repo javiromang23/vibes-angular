@@ -10,6 +10,7 @@ export class User {
         public avatar: any,
         public website: string,
         public bio: string,
-        public sex: string
+        public sex: string,
+        public isFollowed: boolean
     ) {}
 }

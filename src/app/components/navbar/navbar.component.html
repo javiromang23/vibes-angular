@@ -1,11 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+<nav class="navbar navbar-expand-lg navbar-light bg-white p-1">
   <div class="d-flex w-50 justify-content-around align-items-center main-nav">
     <a [routerLink]="['/timeline']" class="navbar-brand logo">Vibes</a>
-    <form>
-      <div class="input-group flex-row-reverse" *ngIf="userLoggedIn._id">
-        <input class="form-control" type="search" placeholder="Buscar...">
-        <div class="input-group-prepend">
-          <div class="input-group-text"><i class="fa fa-search"></i></div>
+    <form class="position-relative">
+      <div class="input-group" *ngIf="userLoggedIn._id">
+        <div class="input-group search-box flex-row-reverse">
+          <input class="form-control" type="search" placeholder="Buscar..."
+          (keyup)="searchUser($event)">
+          <div class="input-group-prepend">
+            <div class="input-group-text" *ngIf="!statusSearch"><i class="fa fa-search"></i></div>
+            <div class="input-group-text" *ngIf="statusSearch" (click)="closeSearch($event)"><i class="fa fa-close"></i></div>
+          </div>
+        </div>
+        <div [hidden]="!statusSearch" class="card results shadow p-0" *ngIf="users">
+          <div class="hr border-left border-top"></div>
+          <div class="item d-flex justify-content-between align-items-center border-bottom p-2" *ngFor="let user of users">
+            <div class="image-wrapper d-flex justify-content-center align-self-center">
+              <div class="image rounded-circle mr-0">
+                <a [routerLink]="['/u/', user.username]">
+                  <img [src]="url + 'user/' + user.username + '/' + user.avatar" alt="Foto de perfil" class="img-fluid"
+                    *ngIf="user.avatar">
+                </a>
+              </div>
+            </div>
+            <div class="info">
+              <div class="username">
+                <a [routerLink]="['/u/', user.username]">
+                  <p>{{user.username}}</p>
+                </a>
+              </div>
+              <div *ngIf="!user.isFollowed && user._id !== userLoggedIn._id">
+                <button class="btn btn-dark">Follow</button>
+              </div>
+              <div *ngIf="user.isFollowed">
+                <button class="btn btn-dark">Unfollow</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [hidden]="!statusSearch" class="card results shadow" *ngIf="!users">
+          <div class="hr border-left border-top"></div>
+          <div class="text-center notResults">
+            No se encontraron resultados
+          </div>
         </div>
       </div>
     </form>

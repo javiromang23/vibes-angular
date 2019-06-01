@@ -47,6 +47,12 @@ export class UserService {
     return this.http.get(this.url + 'userById/' + id, {headers});
   }
 
+  /** Método para obtener usuarios */
+  searchUsers(username: string): Observable<any> {
+    const headers = this.headers.set('Authorization', this.getToken());
+    return this.http.get(this.url + 'search-user/' + username, { headers });
+  }
+
   /** Método para modificar un usuario */
   updateUser(user: User, data: FormData = null): Observable<any> {
     let headers: HttpHeaders;

@@ -19,7 +19,7 @@ export class SignInComponent implements OnInit {
     private router: Router
   ) {
     this.token = userService.getToken();
-    this.user = new User('', '', '', '', '', '', new Date(), '', '', '', '');
+    this.user = new User('', '', '', '', '', '', new Date(), '', '', '', '', null);
   }
 
   ngOnInit() {
