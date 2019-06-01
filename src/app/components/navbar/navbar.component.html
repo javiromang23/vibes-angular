@@ -28,11 +28,14 @@
                   <p>{{user.username}}</p>
                 </a>
               </div>
-              <div *ngIf="!user.isFollowed && user._id !== userLoggedIn._id">
-                <button class="btn btn-dark">Follow</button>
+              <div *ngIf="user.isFollowed === undefined && user._id !== userLoggedIn._id">
+                <button class="btn btn-dark" (click)="saveFollow(user.username)">Follow</button>
               </div>
-              <div *ngIf="user.isFollowed">
-                <button class="btn btn-dark">Unfollow</button>
+              <div *ngIf="user.isFollowed === true">
+                <button class="btn btn-dark" (click)="deleteFollow(user.username)">Unfollow</button>
+              </div>
+              <div *ngIf="user.isFollowed === false">
+                <button class="btn btn-dark">Pendiente</button>
               </div>
             </div>
           </div>

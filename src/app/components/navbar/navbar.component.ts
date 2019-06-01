@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { FollowService } from '../../services/follow.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,6 +20,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
+    private followService: FollowService
   ) {
     this.url = this.userService.url;
     this.userLoggedIn = new User('', '', '', '', '', '', new Date(), '', '', '', '', null);
@@ -66,7 +68,11 @@ export class NavbarComponent implements OnInit {
       () => {
         this.follows.map((follow) => {
           const index = this.users.findIndex(x => x._id === follow.followed);
-          this.users[index].isFollowed = true;
+          if (follow.toAccept === true ) {
+            this.users[index].isFollowed = true;
+          } else {
+            this.users[index].isFollowed = false;
+          }
         });
         console.clear();
       }
@@ -82,6 +88,35 @@ export class NavbarComponent implements OnInit {
   navigateProfile(username: string) {
     this.router.navigateByUrl('/timeline', { skipLocationChange: true }).then(() =>
       this.router.navigate(['/u/' + username]));
+  }
+
+  saveFollow(username: string) {
+    this.followService.saveFollow(username).subscribe(
+      response => {
+        if (response.follow.toAccept === true) {
+          const index = this.users.findIndex(x => x.username === username);
+          this.users[index].isFollowed = true;
+        } else {
+          const index = this.users.findIndex(x => x.username === username);
+          this.users[index].isFollowed = false;
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
+  deleteFollow(username: string) {
+    this.followService.deleteFollow(username).subscribe(
+      response => {
+        const index = this.users.findIndex(x => x.username === username);
+        this.users[index].isFollowed = undefined;
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
 }
