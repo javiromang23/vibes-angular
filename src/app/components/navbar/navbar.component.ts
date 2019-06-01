@@ -79,4 +79,9 @@ export class NavbarComponent implements OnInit {
     ev.target.parentNode.parentNode.parentNode.children[0].value = '';
   }
 
+  navigateProfile(username: string) {
+    this.router.navigateByUrl('/timeline', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/u/' + username]));
+  }
+
 }

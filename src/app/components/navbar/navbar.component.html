@@ -5,7 +5,7 @@
       <div class="input-group" *ngIf="userLoggedIn._id">
         <div class="input-group search-box flex-row-reverse">
           <input class="form-control" type="search" placeholder="Buscar..."
-          (keyup)="searchUser($event)">
+          (keypress)="searchUser($event)">
           <div class="input-group-prepend">
             <div class="input-group-text" *ngIf="!statusSearch"><i class="fa fa-search"></i></div>
             <div class="input-group-text" *ngIf="statusSearch" (click)="closeSearch($event)"><i class="fa fa-close"></i></div>
@@ -16,7 +16,7 @@
           <div class="item d-flex justify-content-between align-items-center border-bottom p-2" *ngFor="let user of users">
             <div class="image-wrapper d-flex justify-content-center align-self-center">
               <div class="image rounded-circle mr-0">
-                <a [routerLink]="['/u/', user.username]">
+                <a (click)="navigateProfile(user.username)">
                   <img [src]="url + 'user/' + user.username + '/' + user.avatar" alt="Foto de perfil" class="img-fluid"
                     *ngIf="user.avatar">
                 </a>
@@ -24,7 +24,7 @@
             </div>
             <div class="info">
               <div class="username">
-                <a [routerLink]="['/u/', user.username]">
+                <a (click)="navigateProfile(user.username)">
                   <p>{{user.username}}</p>
                 </a>
               </div>
