@@ -78,7 +78,7 @@ export class ProfileComponent implements OnInit {
 
   loadPublications() {
     let publications;
-    this.publicationService.getPublicationsFollows().subscribe(
+    this.publicationService.getPublicationsUser(this.usernameProfile).subscribe(
       response => {
         publications = response.publications;
         this.counters.publications = response.total;
