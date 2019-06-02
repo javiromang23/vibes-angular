@@ -3,7 +3,7 @@
   <main class="container d-flex flex-column justify-content-center main-container">
     <div class="categories d-flex justify-content-center align-items-center overflow-auto">
       <div class="category" *ngFor="let category of categories">
-        <a class="btn btn-custom">{{category}}</a>
+        <a class="btn btn-custom" (click)="loadPublications(category)">{{category}}</a>
       </div>
     </div>
     <h5>Explorar</h5>

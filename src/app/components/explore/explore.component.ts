@@ -27,6 +27,7 @@ export class ExploreComponent implements OnInit {
     private commentService: CommentService
   ) {
     this.categories = [
+      'Vibes',
       'Peoplevibes',
       'Placevibes',
       'Clothesvibes',
@@ -39,13 +40,15 @@ export class ExploreComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadPublications();
+    this.loadPublications(null);
   }
 
-  loadPublications() {
-    this.publicationService.getPublicationsPublic().subscribe(
+  loadPublications(category) {
+    if (category === 'Vibes') { category = null; }
+    this.publicationService.getPublicationsPublic(category).subscribe(
       response => {
         this.publications = response.publications;
+        console.log(response);
       },
       err => {
         this.publications = null;
