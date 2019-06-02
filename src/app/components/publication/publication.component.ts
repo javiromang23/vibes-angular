@@ -8,6 +8,8 @@ import { CommentService } from '../../services/comment.service';
 import { Comment } from '../../models/comment';
 import { User } from '../../models/user';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { NotificationService } from '../../services/notification.service';
+import { Notification } from '../../models/notification';
 
 @Component({
   selector: 'app-publication',
@@ -32,6 +34,7 @@ export class PublicationComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private modalService: BsModalService,
+    private notificationService: NotificationService
   ) {
     this.url = this.userService.url;
     this.token = userService.getToken();
@@ -114,6 +117,20 @@ export class PublicationComponent implements OnInit {
       response => {
         publication.likes++;
         publication.isLiked = true;
+        if (this.user._id !== publication.user._id) {
+          const notification = new Notification(undefined, undefined, undefined, new Date(), '', undefined);
+          notification.fromUser = this.user;
+          notification.message = `A ${this.user.username} le ha gustado tu publicación.`;
+          notification.publication = publication;
+          notification.user = publication.user;
+          this.notificationService.saveNotification(notification).subscribe(
+            data => {
+            },
+            err => {
+              console.error(err);
+            }
+          );
+        }
       },
       err => {
         console.error(err);
@@ -137,6 +154,20 @@ export class PublicationComponent implements OnInit {
     this.commentService.saveCommentPublication(publication._id, text).subscribe(
       response => {
         this.comments.unshift(response.comment);
+        if (this.user._id !== publication.user._id) {
+          const notification = new Notification(undefined, undefined, undefined, new Date(), '', undefined);
+          notification.fromUser = this.user;
+          notification.message = `${this.user.username} ha comentado en tu publicación.`;
+          notification.publication = publication;
+          notification.user = publication.user;
+          this.notificationService.saveNotification(notification).subscribe(
+            data => {
+            },
+            err => {
+              console.error(err);
+            }
+          );
+        }
       },
       err => {
         console.error(err);
@@ -162,6 +193,20 @@ export class PublicationComponent implements OnInit {
           data => {
             this.publication.likes++;
             this.publication.isLiked = true;
+            if (this.user._id !== this.publication.user._id) {
+              const notification = new Notification(undefined, undefined, undefined, new Date(), '', undefined);
+              notification.fromUser = this.user;
+              notification.message = `A ${this.user.username} le ha gustado tu publicación.`;
+              notification.publication = this.publication;
+              notification.user = this.publication.user;
+              this.notificationService.saveNotification(notification).subscribe(
+                res => {
+                },
+                err => {
+                  console.error(err);
+                }
+              );
+            }
           },
           err => {
             console.error(err);

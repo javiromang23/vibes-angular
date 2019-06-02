@@ -6,6 +6,8 @@ import { CommentService } from '../../services/comment.service';
 import { LikeService } from '../../services/like.service';
 import { Publication } from 'src/app/models/publication';
 import { User } from '../../models/user';
+import { NotificationService } from '../../services/notification.service';
+import { Notification } from '../../models/notification';
 
 @Component({
   selector: 'app-timeline',
@@ -20,13 +22,15 @@ export class TimelineComponent implements OnInit {
   public comments: Array<any>;
   public userLoggedIn: User;
   public url: string;
+  public notifications: any;
 
   constructor(
     private userService: UserService,
     private publicationService: PublicationService,
     private likeService: LikeService,
     private commentService: CommentService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {
     this.url = this.userService.url;
     this.token = userService.getToken();
@@ -40,6 +44,7 @@ export class TimelineComponent implements OnInit {
 
   ngOnInit() {
     this.getUserLoggedIn();
+    this.getNotifications();
   }
 
   async getUserLoggedIn() {
@@ -85,6 +90,18 @@ export class TimelineComponent implements OnInit {
     );
   }
 
+  getNotifications() {
+    this.notificationService.getNotificationByUser().subscribe(
+      data => {
+        console.log(data);
+        this.notifications = data['notifications'];
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
   getLikesPublications(publication: Publication) {
     this.likeService.getLikesByPublication(publication._id).subscribe(
       res => {
@@ -113,6 +130,20 @@ export class TimelineComponent implements OnInit {
       response => {
         publication.likes++;
         publication.isLiked = true;
+        if (this.user._id !== publication.user._id) {
+          const notification = new Notification(undefined, undefined, undefined, new Date(), '', undefined);
+          notification.fromUser = this.user;
+          notification.message = `A ${this.user.username} le ha gustado tu publicación.`;
+          notification.publication = publication;
+          notification.user = publication.user;
+          this.notificationService.saveNotification(notification).subscribe(
+            data => {
+            },
+            err => {
+              console.error(err);
+            }
+          );
+        }
       },
       error => {
         console.error(error);
@@ -150,6 +181,20 @@ export class TimelineComponent implements OnInit {
     this.commentService.saveCommentPublication(publication._id, text).subscribe(
       response => {
         this.comments[publication._id].push(response.comment);
+        if (this.user._id !== publication.user._id) {
+          const notification = new Notification(undefined, undefined, undefined, new Date(), '', undefined);
+          notification.fromUser = this.user;
+          notification.message = `${this.user.username} ha comentado en tu publicación.`;
+          notification.publication = publication;
+          notification.user = publication.user;
+          this.notificationService.saveNotification(notification).subscribe(
+            data => {
+            },
+            err => {
+              console.error(err);
+            }
+          );
+        }
       },
       error => {
         console.error(error);
@@ -177,6 +222,20 @@ export class TimelineComponent implements OnInit {
           data => {
             this.publications[index].likes++;
             this.publications[index].isLiked = true;
+            if (this.user._id !== this.publications[index].user._id) {
+              const notification = new Notification(undefined, undefined, undefined, new Date(), '', undefined);
+              notification.fromUser = this.user;
+              notification.message = `A ${this.user.username} le ha gustado tu publicación.`;
+              notification.publication = this.publications[index];
+              notification.user = this.publications[index].user;
+              this.notificationService.saveNotification(notification).subscribe(
+                res => {
+                },
+                err => {
+                  console.error(err);
+                }
+              );
+            }
           },
           err => {
             console.error(err);

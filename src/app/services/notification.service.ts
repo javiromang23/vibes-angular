@@ -22,14 +22,13 @@ export class NotificationService {
     this.token = this.userService.getToken();
   }
 
-  saveNotification(username: string, notification: Notification): Observable<any> {
+  saveNotification(notification: Notification): Observable<any> {
     const headers = this.headers.set('authorization', this.token);
-    return this.http.post(this.url + 'like/' + username, notification, { headers });
+    return this.http.post(this.url + 'notification/' + notification.user._id, notification, { headers });
   }
-
 
   getNotificationByUser() {
     const headers = this.headers.set('Authorization', this.token);
-    return this.http.get(this.url + 'notification/', { headers });
+    return this.http.get(this.url + 'notification', { headers });
   }
 }

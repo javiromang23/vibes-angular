@@ -86,8 +86,31 @@
               <div class="card-header border-bottom-0 bg-white">
                 Notificaciones
               </div>
-              <div class="card-body">
-
+              <div class="card-body notifications p-0">
+                <div *ngIf="notifications" class="d-flex justify-content-center align-items-center flex-column">
+                  <div class="notification border-top d-flex  align-items-center flex-row p-2" *ngFor="let notification of notifications">
+                    <div class="image-wrapper">
+                      <div class="image-profile image-profile-sm rounded-circle">
+                        <a [routerLink]="['/u/' + notification.fromUser.username]"><img [src]="url + 'user/' + notification.fromUser.username + '/' + notification.fromUser.avatar"
+                            alt="perfil" /></a>
+                      </div>
+                    </div>
+                    <div class="info d-flex justify-content-center align-items-center">
+                      <div class="message d-flex">
+                        <p>{{notification.message}}</p>
+                      </div>
+                      <div class="publication" *ngIf="notification.publication">
+                        <div class="image-wrapper">
+                          <div class="image-profile image-profile-sm">
+                            <a [routerLink]="['/p/' + notification.publication._id]">
+                              <img [src]="url + 'publication/' + notification.user.username + '/' + notification.publication.image" alt="{{notification.publication.title}}">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="card-footer border-0 card-footer-custom">
