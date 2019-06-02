@@ -59,14 +59,14 @@
     margin: 5px 10px;
 }
 
-.username .btn-custom {
+.btn-custom {
     border: 1px solid #ced4da;
     border-radius: .25rem;
     font-weight: 600;
     padding: 2.5px 10px;
 }
 
-.username .btn-custom:hover {
+.btn-custom:hover {
     transform: scale(1.05);
     transition: .2s ease-in;
 }
@@ -118,7 +118,7 @@
     background-color:#fafafa !important;
     border-top-left-radius: 0!important;
     border-top-right-radius: 0!important;
-    padding: 15px!important;
+    padding: 10px!important;
     font-weight: 600!important;
     font-size: 16px!important;
     color: #999!important;
@@ -167,6 +167,51 @@
     color: #fff;
 }
 
+.image-sm {
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+    position: relative;
+    background-color: #fff;
+}
+
+.image-sm img{
+    max-width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.username-sm {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.username-sm p {
+    padding: 0;
+    margin: 0;
+}
+
+.info-sm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+
+.followeds, .followers {
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 0;
+    max-height: 250px;
+    overflow: auto;
+}
+
+.item:first-child {
+    border-top: none!important;
+}
+
 /*** Media queries ***/
 @media (max-width: 1366px) {
     .main-container {
@@ -211,7 +256,6 @@
 @media (max-width: 568px) {
     .col-rs {
         padding: 1rem;
-        padding-top: 3rem!important;
         padding-bottom: 0rem!important;
     }
     .container {
@@ -254,13 +298,14 @@
     ::ng-deep .customClass2 > a {
         background-color:#fafafa !important;
         border: none !important;
-        padding: 20px!important;
+        padding: 10px!important;
         font-weight: 600!important;
         font-size: 16px!important;
     }
     ::ng-deep .customClass > a.active,
     ::ng-deep .customClass2 > a.active {
-        border-top: 1px solid #262626!important;
+        border-top: none!important;
+        color: #007bff!important;
     }
     ::ng-deep .nav-tabs {
         border: none;

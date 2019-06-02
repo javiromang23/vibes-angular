@@ -27,13 +27,13 @@
                         </div>
                     </div>
                     <div class="counters d-none d-md-flex flex-md-row" *ngIf="counters">
-                        <div class="publications">
+                        <div class="publications disable-select">
                             <p>{{counters.publications}} <span>Publicaciones</span></p>
                         </div>
-                        <div class="followers">
+                        <div class="followers disable-select" (click)="showFollowers(modalFollowers)">
                             <p>{{counters.followers}} <span>Seguidores</span></p>
                         </div>
-                        <div class="followeds">
+                        <div class="followeds disable-select" (click)="showFolloweds(modalFolloweds)">
                             <p>{{counters.followeds}} <span>Seguidos</span></p>
                         </div>
                     </div>
@@ -65,10 +65,10 @@
                 <div class="publications">
                     <p>{{counters.publications}} <span>Publicaciones</span></p>
                 </div>
-                <div class="followers">
+                <div class="followers" (click)="showFollowers(modalFollowers)">
                     <p>{{counters.followers}} <span>Seguidores</span></p>
                 </div>
-                <div class="followeds">
+                <div class="followeds" (click)="showFolloweds(modalFolloweds)">
                     <p>{{counters.followeds}} <span>Seguidos</span></p>
                 </div>
             </div>
@@ -113,12 +113,80 @@
                             </div>
                         </div>
                     </tab>
-                    <tab customClass="customClass2">
+                    <!-- <tab customClass="customClass2">
                         <ng-template tabHeading>
                             <span class="tag-wrapp"><i class="fa fa-tags icon-tag"></i><span class="d-none d-md-inline text-tag"> ETIQUETADAS</span></span>
                         </ng-template>
-                    </tab>
+                    </tab> -->
             </tabset>
         </main>
     </main>
 </div>
+<ng-template #modalFolloweds>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Seguidos</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true"><i class="fa fa-close"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="item d-flex justify-content-between align-items-center border-top p-2" 
+        *ngFor="let follow of followeds">
+            <div class="image-wrapper d-flex justify-content-center align-self-center">
+                <div class="image-sm rounded-circle mr-0">
+                    <a (click)="navigateProfile(follow.followed.username)">
+                        <img [src]="url + 'user/' + follow.followed.username + '/' + follow.followed.avatar" alt="Foto de perfil" class="img-fluid"
+                            *ngIf="follow.followed.avatar">
+                    </a>
+                </div>
+            </div>
+            <div class="info-sm">
+                <div class="username-sm">
+                    <a (click)="navigateProfile(follow.followed.username)">
+                        <p>{{follow.followed.username}}</p>
+                    </a>
+                </div>
+                <div *ngIf="follow.toAccept == true && follow.followed.username != userLoggedIn.username">
+                    <a class="btn btn-custom" (click)="deleteFollow(follow.followed.username)">Unfollow</a>
+                </div>
+                <div *ngIf="follow.toAccept == false">
+                    <a class="btn btn-custom" (click)="saveFollow(follow.followed.username)">Follow</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #modalFollowers>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Seguidores</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true"><i class="fa fa-close"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="item d-flex justify-content-between align-items-center border-top p-2"
+            *ngFor="let follow of followers">
+            <div class="image-wrapper d-flex justify-content-center align-self-center">
+                <div class="image-sm rounded-circle mr-0">
+                    <a (click)="navigateProfile(follow.user.username)">
+                        <img [src]="url + 'user/' + follow.user.username + '/' + follow.user.avatar"
+                            alt="Foto de perfil" class="img-fluid" *ngIf="follow.user.avatar">
+                    </a>
+                </div>
+            </div>
+            <div class="info-sm">
+                <div class="username-sm">
+                    <a (click)="navigateProfile(follow.user.username)">
+                        <p>{{follow.user.username}}</p>
+                    </a>
+                </div>
+                <div *ngIf="follow.toAccept == true">
+                    <a class="btn btn-custom" (click)="deleteFollow(follow.user.username)">Unfollow</a>
+                </div>
+                <div *ngIf="follow.toAccept == false">
+                    <a class="btn btn-custom" (click)="saveFollow(follow.user.username)">Follow</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

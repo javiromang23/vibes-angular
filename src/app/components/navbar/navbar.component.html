@@ -5,7 +5,7 @@
       <div class="input-group" *ngIf="userLoggedIn._id">
         <div class="input-group search-box flex-row-reverse">
           <input class="form-control" type="search" placeholder="Buscar..."
-          (keypress)="searchUser($event)">
+          (keydown)="searchUser($event)">
           <div class="input-group-prepend">
             <div class="input-group-text" *ngIf="!statusSearch"><i class="fa fa-search"></i></div>
             <div class="input-group-text" *ngIf="statusSearch" (click)="closeSearch($event)"><i class="fa fa-close"></i></div>

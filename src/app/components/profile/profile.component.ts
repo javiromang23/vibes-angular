@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user';
 import { LikeService } from '../../services/like.service';
 import { CommentService } from '../../services/comment.service';
 import { FollowService } from '../../services/follow.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-profile',
@@ -22,6 +23,9 @@ export class ProfileComponent implements OnInit {
   public counters: any;
   public url: string;
   public statusFollow: boolean;
+  public modalRef: BsModalRef;
+  public followeds: Array<any>;
+  public followers: Array<any>;
 
   constructor(
     private userService: UserService,
@@ -30,7 +34,8 @@ export class ProfileComponent implements OnInit {
     private followService: FollowService,
     private commentService: CommentService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private modalService: BsModalService
   ) {
     this.url = this.userService.url;
     this.token = userService.getToken();
@@ -167,6 +172,14 @@ export class ProfileComponent implements OnInit {
         if (response.follow.toAccept === true) {
           this.statusFollow = true;
           this.getCounters();
+          if (this.followeds != null) {
+            const index = this.followeds.findIndex(x => x.followed.username === username);
+            this.followeds[index].toAccept = true;
+          }
+          if (this.followers != null) {
+            const index = this.followers.findIndex(x => x.user.username === username);
+            this.followers[index].toAccept = true;
+          }
         } else {
           this.statusFollow = false;
         }
@@ -182,11 +195,71 @@ export class ProfileComponent implements OnInit {
       response => {
         this.statusFollow = undefined;
         this.getCounters();
+        if (this.followeds != null) {
+          const index = this.followeds.findIndex(x => x.followed.username === username);
+          this.followeds[index].toAccept = false;
+        }
+        if (this.followers != null) {
+          const index = this.followers.findIndex(x => x.user.username === username);
+          this.followers[index].toAccept = false;
+        }
       },
       err => {
         console.error(err);
       }
     );
+  }
+
+  showFolloweds(modalTemplate) {
+    this.followService.getFolloweds(this.user.username).subscribe(
+      response => {
+        this.followeds = response.follows;
+        this.modalRef = this.modalService.show(modalTemplate,
+          Object.assign({}, { class: 'modal-custom modal-custom-confirm' }));
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
+  showFollowers(modalTemplate) {
+    this.followService.getFollowers(this.user.username).subscribe(
+      response => {
+        this.followers = response.follows;
+        this.followers.map((follow) => {
+          this.onLoad(follow.user.username);
+        });
+      },
+      err => {
+        console.error(err);
+      },
+      () => {
+        this.modalRef = this.modalService.show(modalTemplate,
+          Object.assign({}, { class: 'modal-custom modal-custom-confirm' }));
+      }
+    );
+  }
+
+  navigateProfile(username: string) {
+    this.router.navigateByUrl('/timeline', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/u/' + username]));
+  }
+
+  onLoad(username: string) {
+    const index = this.followers.findIndex(x => x.user.username === username);
+    if (username === this.userLoggedIn.username) {
+      this.followers[index].toAccept = undefined;
+    } else {
+      this.followService.getFollow(username).subscribe(
+        response => {
+          this.followers[index].toAccept = true;
+        },
+        err => {
+          this.followers[index].toAccept = false;
+        }
+      );
+    }
   }
 
 }
