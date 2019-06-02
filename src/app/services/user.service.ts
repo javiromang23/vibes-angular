@@ -119,6 +119,13 @@ export class UserService {
     return this.http.post(this.url + 'resetPasswordByEmail/' + hash , { password }, { headers });
   }
 
+  /** Método para restablecer contraseña sin hash */
+  resetPassword(username: string, data: any): Observable<any> {
+    const headers = this.headers.set('Authorization', this.getToken());
+    return this.http.post(this.url + 'resetPassword/' + username,
+    { oldPassword: data.oldPassword, newPassword: data.newPassword }, { headers });
+  }
+
 
   checkResetPassword(hash: string): Observable<any> {
     const headers = this.headers;

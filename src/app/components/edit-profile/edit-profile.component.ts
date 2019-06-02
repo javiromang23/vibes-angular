@@ -17,6 +17,8 @@ export class EditProfileComponent implements OnInit {
   public status: boolean;
   public modalRef: BsModalRef;
   public statusDelete: boolean;
+  public changePassword: any;
+  public result: boolean;
 
   constructor(
     private userService: UserService,
@@ -30,6 +32,11 @@ export class EditProfileComponent implements OnInit {
       this.usernameProfile = params.username;
     });
     this.status = null;
+    this.changePassword = {
+      newPassword: '',
+      oldPassword: '',
+      repeatPassword: ''
+    };
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }
@@ -98,6 +105,24 @@ export class EditProfileComponent implements OnInit {
         console.error(err);
       }
     );
+  }
+
+  onSubmitPassword(form) {
+    this.result = null;
+    if (this.changePassword.newPassword === this.changePassword.repeatPassword) {
+      this.userService.resetPassword(this.usernameProfile, this.changePassword).subscribe(
+        response => {
+          this.result = true;
+          this.changePassword.newPassword = '';
+          this.changePassword.oldPassword = '';
+          this.changePassword.repeatPassword = '';
+        },
+        err => {
+          console.error(err);
+          this.result = false;
+        }
+      );
+    }
   }
 
 }
