@@ -93,7 +93,6 @@ export class TimelineComponent implements OnInit {
   getNotifications() {
     this.notificationService.getNotificationByUser().subscribe(
       data => {
-        console.log(data);
         this.notifications = data['notifications'];
       },
       err => {

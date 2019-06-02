@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { FollowService } from '../../services/follow.service';
+import { NotificationService } from '../../services/notification.service';
+import { Notification } from '../../models/notification';
 
 @Component({
   selector: 'app-navbar',
@@ -16,14 +18,18 @@ export class NavbarComponent implements OnInit {
   public users: Array<User>;
   public url: string;
   public follows: Array<any>;
+  public notifications: any;
+  public statusNotification: any;
 
   constructor(
     private userService: UserService,
     private router: Router,
-    private followService: FollowService
+    private followService: FollowService,
+    private notificationService: NotificationService
   ) {
     this.url = this.userService.url;
     this.userLoggedIn = new User('', '', '', '', '', '', new Date(), '', '', '', '', null);
+    this.statusNotification = false;
   }
 
   ngOnInit() {
@@ -47,6 +53,17 @@ export class NavbarComponent implements OnInit {
     console.clear();
     localStorage.clear();
     this.router.navigate(['/sign-in']);
+  }
+
+  getNotifications() {
+    this.notificationService.getNotificationByUser().subscribe(
+      data => {
+        this.notifications = data['notifications'];
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
   searchUser(ev) {
@@ -117,6 +134,15 @@ export class NavbarComponent implements OnInit {
         console.error(err);
       }
     );
+  }
+
+  showNotification() {
+    if (this.statusNotification === false) {
+      this.statusNotification = true;
+      this.getNotifications();
+    } else {
+      this.statusNotification = false;
+    }
   }
 
 }

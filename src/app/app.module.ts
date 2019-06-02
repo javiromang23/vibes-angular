@@ -22,6 +22,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { UploadPublicationComponent } from './components/upload-publication/upload-publication.component';
 import { ExploreComponent } from './components/explore/explore.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ExploreComponent } from './components/explore/explore.component';
     ResetPasswordComponent,
     ForgetPasswordComponent,
     UploadPublicationComponent,
-    ExploreComponent
+    ExploreComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,

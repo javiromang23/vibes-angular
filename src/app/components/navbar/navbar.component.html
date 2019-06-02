@@ -61,11 +61,41 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/explore']"><i class="fa fa-compass"></i></a>
         </li>
-        <li class="nav-item" *ngIf="userLoggedIn">
-          <a class="nav-link" [routerLink]="['/', userLoggedIn.username]"><i class="fa fa-heart-o"></i></a>
+        <li class="nav-item position-relative" *ngIf="userLoggedIn">
+          <a class="nav-link" (click)="showNotification()"><i class="fa fa-heart-o"></i></a>
+          <div [hidden]="!statusNotification" class="card results results-notification shadow p-0 notifications" *ngIf="notifications">
+            <div class="hr border-left border-top"></div>
+            <div class="d-flex justify-content-center align-items-center flex-column">
+              <div class="notification border-top d-flex  align-items-center flex-row p-2"
+                *ngFor="let notification of notifications">
+                <div class="image-wrapper">
+                  <div class="image-profile image-profile-sm rounded-circle">
+                    <a [routerLink]="['/u/' + notification.fromUser.username]"><img
+                        [src]="url + 'user/' + notification.fromUser.username + '/' + notification.fromUser.avatar"
+                        alt="perfil" /></a>
+                  </div>
+                </div>
+                <div class="info d-flex justify-content-center align-items-center flex-fill">
+                  <div class="message d-flex">
+                    <p>{{notification.message}}</p>
+                  </div>
+                  <div class="publication" *ngIf="notification.publication">
+                    <div class="image-wrapper">
+                      <div class="image-profile image-profile-sm">
+                        <a [routerLink]="['/p/' + notification.publication._id]">
+                          <img [src]="url + 'publication/' + notification.user.username + '/' + notification.publication.image"
+                            alt="{{notification.publication.title}}">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </li>
         <li class="nav-item" *ngIf="userLoggedIn">
-          <a class="nav-link" [routerLink]="['/u/', userLoggedIn.username]"><i class="fa fa-user"></i></a>
+          <a class="nav-link" (click)="navigateProfile(userLoggedIn.username)"><i class="fa fa-user"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" (click)="logOut()"><i class="fa fa-sign-out"></i></a>
@@ -91,9 +121,9 @@
     <a class="nav-link" [routerLink]="[ '/upload-publication' ]"><i class="fa fa-plus-square"></i></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/', userLoggedIn.username]"><i class="fa fa-heart-o"></i></a>
+    <a class="nav-link" [routerLink]="['/notifications']"><i class="fa fa-heart-o"></i></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/u/', userLoggedIn.username]"><i class="fa fa-user"></i></a>
+    <a class="nav-link" (click)="navigateProfile(userLoggedIn.username)"><i class="fa fa-user"></i></a>
   </li>
 </ul>

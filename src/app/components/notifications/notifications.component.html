@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<div class="container-fluid p-0 mt-5 pt-3 main">
+  <main class="container d-flex">
+    <div class="d-flex justify-content-center align-items-center flex-column">
+      <div class="notification border-top d-flex  align-items-center flex-row p-2"
+        *ngFor="let notification of notifications">
+        <div class="image-wrapper">
+          <div class="image-profile image-profile-sm rounded-circle">
+            <a [routerLink]="['/u/' + notification.fromUser.username]"><img
+                [src]="url + 'user/' + notification.fromUser.username + '/' + notification.fromUser.avatar"
+                alt="perfil" /></a>
+          </div>
+        </div>
+        <div class="info d-flex justify-content-around align-items-center flex-fill">
+          <div class="message d-flex flex-fill">
+            <p>{{notification.message}}</p>
+          </div>
+          <div class="w-auto" *ngIf="notification.publication">
+            <div class="image-wrapper">
+              <div class="image-profile image-profile-sm">
+                <a [routerLink]="['/p/' + notification.publication._id]">
+                  <img [src]="url + 'publication/' + notification.user.username + '/' + notification.publication.image"
+                    alt="{{notification.publication.title}}">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -12,6 +12,7 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UploadPublicationComponent } from './components/upload-publication/upload-publication.component';
 import { ExploreComponent } from './components/explore/explore.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ErrorComponent } from './components/error/error.component';
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'reset-password/:hash', component: ResetPasswordComponent},
   { path: 'upload-publication', component: UploadPublicationComponent},
   { path: 'explore', component: ExploreComponent },
+  { path: 'notifications', component: NotificationsComponent},
   { path: 'error', component: ErrorComponent },
   { path: '**', component: ErrorComponent }
 ];

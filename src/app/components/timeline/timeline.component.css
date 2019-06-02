@@ -4,7 +4,7 @@
 }
 
 .image-wrapper {
-    width: fit-content;
+    width: auto;
     margin-right: 15px;
 }
 
@@ -259,6 +259,9 @@
 }
 
 @media (max-width: 568px) {
+    .notification:first-child {
+        border-top: none!important;
+    }
     .submit-comment {
         width: 30%;
     }
