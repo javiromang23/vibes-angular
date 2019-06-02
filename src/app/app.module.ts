@@ -21,6 +21,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { UploadPublicationComponent } from './components/upload-publication/upload-publication.component';
+import { ExploreComponent } from './components/explore/explore.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UploadPublicationComponent } from './components/upload-publication/uplo
     EditProfileComponent,
     ResetPasswordComponent,
     ForgetPasswordComponent,
-    UploadPublicationComponent
+    UploadPublicationComponent,
+    ExploreComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UploadPublicationComponent } from './components/upload-publication/upload-publication.component';
+import { ExploreComponent } from './components/explore/explore.component';
 import { ErrorComponent } from './components/error/error.component';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'reset-password', component: ForgetPasswordComponent},
   { path: 'reset-password/:hash', component: ResetPasswordComponent},
   { path: 'upload-publication', component: UploadPublicationComponent},
+  { path: 'explore', component: ExploreComponent },
   { path: 'error', component: ErrorComponent },
   { path: '**', component: ErrorComponent }
 ];

@@ -43,8 +43,8 @@ export class ProfileComponent implements OnInit {
       this.usernameProfile = params.username;
     });
     this.statusFollow = null;
+    this.publications = null;
     this.counters = {};
-    this.publications = [];
     if (!this.token) {
       this.router.navigate(['/sign-in']);
     }
@@ -84,7 +84,6 @@ export class ProfileComponent implements OnInit {
         if (this.user._id === this.userLoggedIn._id) {
           this.statusFollow = true;
         } else {
-          this.publications = null;
           this.followService.getFollow(this.user.username).subscribe(
             response => {
               if (response.follow.toAccept !== false) {
@@ -103,20 +102,24 @@ export class ProfileComponent implements OnInit {
   }
 
   loadPublications() {
-    let publications;
     this.publicationService.getPublicationsUser(this.usernameProfile).subscribe(
       response => {
-        publications = response.publications;
+        this.publications = response.publications;
         this.counters.publications = response.total;
-        publications.map((publication, index) => {
-          this.getLikesPublications(publication);
-          this.getCommentsPublication(publication);
-        });
       },
       err => {
-        this.publications = null;
         this.counters.publications = err.error.total;
         console.error(err);
+      },
+      () => {
+        if (this.publications.length > 0) {
+          this.publications.map(publication => {
+            this.getLikesPublications(publication);
+            this.getCommentsPublication(publication);
+          });
+        } else {
+          this.publications = null;
+        }
       }
     );
   }
@@ -124,13 +127,13 @@ export class ProfileComponent implements OnInit {
   getLikesPublications(publication: Publication) {
     this.likeService.getLikesByPublication(publication._id).subscribe(
       res => {
-        publication.likes = res.total;
+        const index = this.publications.findIndex(x => x._id === publication._id);
+        this.publications[index].likes = res.total;
       },
       error => {
         console.error(error);
       },
     );
-    this.publications.push(publication);
   }
 
   getCommentsPublication(publication: Publication) {

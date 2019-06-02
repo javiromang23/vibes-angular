@@ -34,6 +34,11 @@ export class PublicationService {
     return this.http.get(this.url + 'publications/follows', {headers});
   }
 
+  public getPublicationsPublic(): Observable<any> {
+    const headers = this.headers.set('Authorization', this.userService.token);
+    return this.http.get(this.url + 'publications/public', { headers });
+  }
+
   public getImage(username: string, image: string): Observable<Blob> {
     const headers = this.headers.set('Authorization', this.userService.token);
     return this.http.get(this.url + 'publication/' + username + '/' + image,

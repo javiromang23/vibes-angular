@@ -134,7 +134,7 @@
 ::ng-deep .customClass2 > a.active {
     color: #262626!important;
     border: none!important;
-    border-top: 1px solid #262626!important;
+    border-top: 1px solid rgb(153, 153, 153, 0.5)!important;
 }
 
 .tag-wrapp {
@@ -154,7 +154,7 @@
 }
 
 .link-publication:hover > .card > img ~ .overlay {
-    background-color: rgb(153,153,153, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     visibility: visible!important;
 }
 

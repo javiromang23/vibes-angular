@@ -1,0 +1,124 @@
+/* Categorias */
+
+.categories {
+    padding: .5rem;
+}
+
+.category {
+    padding: 1rem;
+}
+
+.btn-custom {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    font-weight: 600;
+    padding: 2.5px 10px;
+}
+
+.btn-custom:hover {
+    transform: scale(1.05);
+    transition: .2s ease-in;
+}
+
+/* Titulo explorar */
+h5 {
+    color: #999;
+    font-size: 16px;
+    padding: .5rem;
+}
+
+/* Publicaciones */
+.publication .image {
+    width: 100%;
+    height: 400px;
+}
+
+.publication .image img {
+    object-fit: fill;
+}
+
+.publication {
+    margin: 0.3%!important;
+    width: 24.4%;
+}
+
+.link-publication:hover > .card > img ~ .overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+    visibility: visible!important;
+}
+
+.link-publication:hover > .card > img {
+    filter: blur(1px);
+}
+
+.text-overlay {
+    font-size: 25px;
+    color: #fff;
+}
+
+/*** Media queries ***/
+@media (max-width: 1366px) {
+    .main-container {
+        width: 60%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-container {
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+    .container {
+        height: auto;
+    }
+    .container-fluid {
+        padding: 0;
+    }
+    .publication .image img {
+        object-fit: cover;
+    }
+    .publication {
+        width: 32.7%!important;
+        margin: 0.3%!important;
+    }
+    .publication .image {
+        height: 250px;
+    }
+    .main-container {
+        width: 100%;
+    }
+    .main-container > header {
+        padding-bottom: 0px!important;
+    }
+    .image {
+        width: 125px;
+        height: 125px;
+    }
+}
+
+@media (max-width: 568px) {
+    .container {
+        padding: 0;
+    }
+    .publication .image img {
+        object-fit: cover;
+    }
+    .image-wrapper {
+        width: auto;
+    }
+    .main-container {
+        padding-top: 3.5em;
+        padding-bottom: 1.5em;
+    }
+    .text-overlay {
+        font-size: 18px;
+    }
+    .image {
+        width: 100px;
+        height: 100px;
+    }
+    .categories {
+        justify-content: start!important;
+    }
+}

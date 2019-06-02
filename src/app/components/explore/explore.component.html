@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<div class="container-fluid p-0 main">
+  <main class="container d-flex flex-column justify-content-center main-container">
+    <div class="categories d-flex justify-content-center align-items-center overflow-auto">
+      <div class="category" *ngFor="let category of categories">
+        <a class="btn btn-custom">{{category}}</a>
+      </div>
+    </div>
+    <h5>Explorar</h5>
+    <div class="publications-wrapper d-flex flex-row flex-wrap" *ngIf="publications">
+      <div class="publication bg-white m-2 d-flex align-items-center p-0"
+        *ngFor="let publication of publications | sort:'publication.createdAt'">
+        <a [routerLink]="['/p/' + publication._id]" class="link-publication">
+          <div class="card border-0">
+            <img [src]="url + 'publication/' + publication.user.username + '/' + publication.image" class="img-fluid">
+            <div class="card-img-overlay d-flex justify-content-center align-items-center invisible overlay">
+              <p class="card-text">
+                <span class="text-overlay">{{publication.likes}} <i class="fa fa-heart-o"></i></span>
+                <span class="text-overlay"> {{publication.comments}} <i class="fa fa-comment-o"></i></span>
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </main>
+</div>
