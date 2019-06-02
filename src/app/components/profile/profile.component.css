@@ -49,6 +49,12 @@
     color: #262626;
 }
 
+.username .edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .username .edit .btn {
     margin: 5px 10px;
 }

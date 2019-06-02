@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
   public usernameProfile: string;
   public counters: any;
   public url: string;
+  public statusFollow: boolean;
 
   constructor(
     private userService: UserService,
@@ -35,7 +36,8 @@ export class ProfileComponent implements OnInit {
     this.token = userService.getToken();
     this.activatedRoute.params.subscribe(params => {
       this.usernameProfile = params.username;
-  });
+    });
+    this.statusFollow = null;
     this.counters = {};
     this.publications = [];
     if (!this.token) {
@@ -58,7 +60,6 @@ export class ProfileComponent implements OnInit {
       },
       () => {
         this.loadProfile();
-        this.loadPublications();
       }
     );
   }
@@ -68,10 +69,30 @@ export class ProfileComponent implements OnInit {
       data => {
         this.user = data.user;
         this.getCounters();
+        this.loadPublications();
       },
       error => {
         console.error(error);
         this.router.navigate(['/error']);
+      },
+      () => {
+        if (this.user._id === this.userLoggedIn._id) {
+          this.statusFollow = true;
+        } else {
+          this.publications = null;
+          this.followService.getFollow(this.user.username).subscribe(
+            response => {
+              if (response.follow.toAccept !== false) {
+                this.statusFollow = true;
+              } else {
+                this.statusFollow = false;
+              }
+            },
+            err => {
+              this.statusFollow = undefined;
+            },
+          );
+        }
       }
     );
   }
@@ -87,9 +108,10 @@ export class ProfileComponent implements OnInit {
           this.getCommentsPublication(publication);
         });
       },
-      error => {
+      err => {
         this.publications = null;
-        console.error(error);
+        this.counters.publications = err.error.total;
+        console.error(err);
       }
     );
   }
@@ -133,8 +155,36 @@ export class ProfileComponent implements OnInit {
           },
           err => {
             console.error(err);
-          }
+          },
         );
+      }
+    );
+  }
+
+  saveFollow(username: string) {
+    this.followService.saveFollow(username).subscribe(
+      response => {
+        if (response.follow.toAccept === true) {
+          this.statusFollow = true;
+          this.getCounters();
+        } else {
+          this.statusFollow = false;
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
+  deleteFollow(username: string) {
+    this.followService.deleteFollow(username).subscribe(
+      response => {
+        this.statusFollow = undefined;
+        this.getCounters();
+      },
+      err => {
+        console.error(err);
       }
     );
   }

@@ -40,4 +40,9 @@ export class FollowService {
     const headers = this.headers.set('Authorization', this.token);
     return this.http.delete(this.url + 'unfollow/' + username, { headers });
   }
+
+  getFollow(username: string): Observable<any> {
+    const headers = this.headers.set('Authorization', this.token);
+    return this.http.get(this.url + 'followed/' + username, { headers });
+  }
 }
