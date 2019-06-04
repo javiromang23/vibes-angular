@@ -48,7 +48,7 @@ import { NotificationsComponent } from './components/notifications/notifications
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    CollapseModule,
+    CollapseModule.forRoot(),
     TabsModule.forRoot(),
     ModalModule.forRoot()
   ],
