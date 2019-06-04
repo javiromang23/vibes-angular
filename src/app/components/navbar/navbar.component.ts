@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
   public follows: Array<any>;
   public notifications: any;
   public statusNotification: any;
+  public isCollapsed: boolean;
 
   constructor(
     private userService: UserService,
